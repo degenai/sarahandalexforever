@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarah &amp; Alex — March 6, 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:            #07050f;
+      --wood-dark:      #1c0e00;
+      --wood-mid:       #2b1800;
+      --wood-border:    #7a5230;
+      --wood-hi:        #b07840;
+      --parchment:      #fef3c7;
+      --gold:           #f59e0b;
+      --gold-glow:      rgba(245,158,11,0.2);
+      --heart:          #dc2626;
+      --green:          #4ade80;
+      --grass:          #15803d;
+      --grass-dark:     #166534;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--sky);
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    /* ── Sky ── */
+    #sky {
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 90% 55% at 50% -5%,  #1d1450 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 78%  8%,  #2e1860 0%, transparent 50%),
+        var(--sky);
+    }
+
+    .star {
+      position: absolute;
+      background: #fdf8ee;
+      animation: twinkle var(--d) ease-in-out infinite var(--dl);
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: .12; transform: scale(1);   }
+      50%      { opacity: 1;   transform: scale(1.3); }
+    }
+
+    /* ── Pixel crescent moon ── */
+    .moon {
+      position: fixed; top: 52px; right: 96px;
+      width: 8px; height: 8px;
+      background: #fefaee;
+      box-shadow:
+         8px 0  0 #fefaee, 16px  0  0 #fefaee,
+         0   8px 0 #fefaee,               24px  8px 0 #fefaee,
+         0  16px 0 #fefaee,               24px 16px 0 #fefaee,
+         8px 24px 0 #fefaee, 16px 24px 0 #fefaee;
+      filter: drop-shadow(0 0 10px rgba(254,250,238,.45));
+    }
+
+    /* ── Grass ── */
+    .grass-strip {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 52px; z-index: 5;
+      background: var(--grass);
+      box-shadow: 0 -4px 0 var(--grass-dark);
+    }
+    .grass-strip::before {
+      content: '';
+      position: absolute; top: -16px; left: 0; right: 0; height: 16px;
+      background: repeating-linear-gradient(
+        90deg,
+        #16a34a 0px, #16a34a  8px,
+        transparent  8px, transparent 14px,
+        #15803d    14px, #15803d    22px,
+        transparent 22px, transparent 28px
+      );
+    }
+
+    /* ── Layout ── */
+    #main {
+      position: relative; z-index: 10;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding-bottom: 52px;
+    }
+
+    /* ── Signpost ── */
+    .signpost { display: flex; flex-direction: column; align-items: center; }
+
+    .sign-board {
+      position: relative;
+      background: var(--wood-mid);
+      border: 6px solid var(--wood-border);
+      box-shadow:
+        inset  6px  6px 0 var(--wood-hi),
+        inset -6px -6px 0 var(--wood-dark),
+        0 0 80px rgba(0,0,0,.85),
+        0 0 40px var(--gold-glow);
+      padding: 36px 52px;
+      max-width: 680px;
+      width: 88vw;
+    }
+
+    /* Corner nails */
+    .nail {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      box-shadow: inset -3px -3px 0 #7c5e00, inset 3px 3px 0 #fff4a0;
+    }
+    .nail.tl { top: 10px;    left: 10px;  }
+    .nail.tr { top: 10px;    right: 10px; }
+    .nail.bl { bottom: 10px; left: 10px;  }
+    .nail.br { bottom: 10px; right: 10px; }
+
+    .names {
+      text-align: center;
+      color: var(--gold);
+      font-size: clamp(20px, 2.8vw, 32px);
+      line-height: 1.8;
+      text-shadow: 4px 4px 0 #5a2800;
+    }
+    .names .connector {
+      display: block;
+      font-size: .5em;
+      color: var(--parchment);
+      opacity: .75;
+      margin: 2px 0;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--parchment);
+      font-size: clamp(6px, .85vw, 9px);
+      letter-spacing: 4px;
+      opacity: .7;
+      margin-top: 6px;
+    }
+
+    .divider {
+      height: 6px; margin: 24px 0;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--wood-border) 0px, var(--wood-border)  8px,
+        var(--wood-dark)   8px, var(--wood-dark)    16px
+      );
+    }
+
+    .cd-label {
+      text-align: center;
+      color: var(--parchment);
+      font-size: 7px; letter-spacing: 2px;
+      opacity: .5; margin-bottom: 14px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+    .cd-value {
+      background: #040210;
+      color: var(--gold);
+      font-size: clamp(17px, 2.3vw, 28px);
+      padding: 14px 10px;
+      min-width: 78px;
+      text-align: center;
+      border: 3px solid var(--wood-border);
+      box-shadow:
+        inset -3px -3px 0 #000,
+        inset  3px  3px 0 #1a1a20,
+        0 0 14px var(--gold-glow);
+      letter-spacing: 3px;
+    }
+
+    .cd-sublabel {
+      font-size: 6px;
+      color: var(--parchment);
+      opacity: .45;
+      letter-spacing: 1px;
+    }
+
+    .date-stamp {
+      text-align: center;
+      color: var(--green);
+      font-size: clamp(7px, .95vw, 10px);
+      letter-spacing: 4px;
+      margin-top: 22px;
+      text-shadow: 2px 2px 0 #14532d;
+    }
+
+    .hearts {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 16px;
+      letter-spacing: 18px;
+      color: var(--heart);
+      filter: drop-shadow(0 0 5px rgba(220,38,38,.55));
+    }
+
+    /* Post legs */
+    .post-legs { display: flex; gap: 220px; }
+    .post-leg {
+      width: 14px; height: 60px;
+      background: var(--wood-border);
+      box-shadow: inset -4px 0 0 var(--wood-dark), inset 4px 0 0 var(--wood-hi);
+    }
+
+    /* ── Hidden private portal ── */
+    .lantern {
+      position: fixed; bottom: 66px; right: 18px;
+      font-size: 20px; opacity: .07;
+      transition: opacity .4s;
+      text-decoration: none; z-index: 20;
+    }
+    .lantern:hover { opacity: .65; }
+
+    /* ── Mobile switch ── */
+    .view-switch {
+      position: fixed; bottom: 6px; left: 50%; transform: translateX(-50%);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px; color: var(--parchment);
+      opacity: .18; text-decoration: none; z-index: 20;
+      letter-spacing: 1px; transition: opacity .3s; white-space: nowrap;
+    }
+    .view-switch:hover { opacity: .55; }
+  </style>
+</head>
+<body>
+
+  <div id="sky"></div>
+  <div class="moon"></div>
+  <div class="grass-strip"></div>
+
+  <div id="main">
+    <div class="signpost">
+
+      <div class="sign-board">
+        <div class="nail tl"></div><div class="nail tr"></div>
+        <div class="nail bl"></div><div class="nail br"></div>
+
+        <div class="names">
+          SARAH
+          <span class="connector">— &amp; —</span>
+          ALEX
+        </div>
+        <div class="subtitle">are getting married</div>
+
+        <div class="divider"></div>
+
+        <div class="cd-label">time until the big day</div>
+        <div class="countdown">
+          <div class="cd-unit">
+            <div class="cd-value" id="days">---</div>
+            <div class="cd-sublabel">days</div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-value" id="hours">--</div>
+            <div class="cd-sublabel">hrs</div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-value" id="mins">--</div>
+            <div class="cd-sublabel">min</div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-value" id="secs">--</div>
+            <div class="cd-sublabel">sec</div>
+          </div>
+        </div>
+
+        <div class="date-stamp">✦ MARCH 6 · 2027 · 5 PM ✦</div>
+        <div class="hearts">♥ ♥ ♥</div>
+      </div>
+
+      <div class="post-legs">
+        <div class="post-leg"></div>
+        <div class="post-leg"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <a class="lantern" href="private/">🏮</a>
+  <a class="view-switch" href="mobile.html">[ mobile view ]</a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    // Stars
+    (function () {
+      var sky = document.getElementById('sky');
+      for (var i = 0; i < 210; i++) {
+        var s = document.createElement('div');
+        var big = Math.random() < .15;
+        s.className = 'star';
+        s.style.cssText =
+          'left:'   + (Math.random()*100).toFixed(1) + '%;' +
+          'top:'    + (Math.random()*86).toFixed(1)  + '%;' +
+          'width:'  + (big ? 3 : 2) + 'px;' +
+          'height:' + (big ? 3 : 2) + 'px;' +
+          '--d:'    + (Math.random()*2.2+.7).toFixed(1) + 's;' +
+          '--dl:-'  + (Math.random()*5).toFixed(1) + 's;';
+        sky.appendChild(s);
+      }
+    })();
+
+    // Countdown — targeting March 6 2027, 5 PM local time
+    function tick() {
+      var target = new Date('2027-03-06T17:00:00');
+      var diff   = Math.max(0, target - Date.now());
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000)  / 60000);
+      var s = Math.floor((diff % 60000)    / 1000);
+      document.getElementById('days').textContent  = String(d).padStart(3, '0');
+      document.getElementById('hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('mins').textContent  = String(m).padStart(2, '0');
+      document.getElementById('secs').textContent  = String(s).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // Entrance animations
+    gsap.from('.sign-board', { opacity:0, y:90,  duration:1.1, ease:'back.out(1.4)', delay:.2  });
+    gsap.from('.post-legs',  { opacity:0, y:40,  duration:.8,  ease:'power2.out',    delay:.7  });
+    gsap.from('.names',      { opacity:0, y:-18, duration:.7,                        delay:1.0 });
+    gsap.from('.subtitle',   { opacity:0,         duration:.6,                        delay:1.25});
+    gsap.from('.countdown',  { opacity:0, y:14,  duration:.7,                        delay:1.45});
+    gsap.from('.date-stamp', { opacity:0,         duration:.6,                        delay:1.7 });
+    gsap.from('.hearts',     { opacity:0, scale:.4, duration:.6, ease:'back.out(2)', delay:1.9 });
+  </script>
+</body>
+</html>

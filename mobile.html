@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarah &amp; Alex — March 6, 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:         #07050f;
+      --wood-dark:   #1c0e00;
+      --wood-mid:    #2b1800;
+      --wood-border: #7a5230;
+      --wood-hi:     #b07840;
+      --parchment:   #fef3c7;
+      --gold:        #f59e0b;
+      --gold-glow:   rgba(245,158,11,0.2);
+      --heart:       #dc2626;
+      --green:       #4ade80;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--sky);
+      font-family: 'Press Start 2P', monospace;
+      overflow-x: hidden;
+    }
+
+    /* ── Sky ── */
+    #sky {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 100% 55% at 50% -5%, #1d1450 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 8%,   #2e1860 0%, transparent 50%),
+        var(--sky);
+    }
+
+    .star {
+      position: fixed;
+      background: #fdf8ee;
+      animation: twinkle var(--d) ease-in-out infinite var(--dl);
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: .12; }
+      50%      { opacity: 1;  }
+    }
+
+    /* ── Layout ── */
+    #main {
+      position: relative; z-index: 10;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative;
+      background: var(--wood-mid);
+      border: 5px solid var(--wood-border);
+      box-shadow:
+        inset  5px  5px 0 var(--wood-hi),
+        inset -5px -5px 0 var(--wood-dark),
+        0 0 60px rgba(0,0,0,.85),
+        0 0 30px var(--gold-glow);
+      padding: 36px 28px 40px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    /* Corner nails */
+    .nail {
+      position: absolute;
+      width: 9px; height: 9px;
+      background: var(--gold);
+      box-shadow: inset -2px -2px 0 #7c5e00, inset 2px 2px 0 #fff4a0;
+    }
+    .nail.tl { top: 9px;    left: 9px;  }
+    .nail.tr { top: 9px;    right: 9px; }
+    .nail.bl { bottom: 9px; left: 9px;  }
+    .nail.br { bottom: 9px; right: 9px; }
+
+    .names {
+      text-align: center;
+      color: var(--gold);
+      font-size: clamp(22px, 7vw, 30px);
+      line-height: 1.9;
+      text-shadow: 3px 3px 0 #5a2800;
+    }
+    .names .connector {
+      display: block;
+      font-size: .45em;
+      color: var(--parchment);
+      opacity: .75;
+      margin: 2px 0;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--parchment);
+      font-size: clamp(6px, 2.2vw, 8px);
+      letter-spacing: 3px;
+      opacity: .7;
+      margin-top: 8px;
+    }
+
+    .divider {
+      height: 5px; margin: 22px 0;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--wood-border) 0px, var(--wood-border)  8px,
+        var(--wood-dark)   8px, var(--wood-dark)    16px
+      );
+    }
+
+    .cd-label {
+      text-align: center;
+      color: var(--parchment);
+      font-size: 6px; letter-spacing: 2px;
+      opacity: .5; margin-bottom: 16px;
+      line-height: 2;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .cd-unit {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+    }
+
+    .cd-value {
+      background: #040210;
+      color: var(--gold);
+      font-size: clamp(20px, 6.5vw, 28px);
+      padding: 16px 8px;
+      width: 100%;
+      text-align: center;
+      border: 3px solid var(--wood-border);
+      box-shadow:
+        inset -3px -3px 0 #000,
+        inset  3px  3px 0 #1a1a20,
+        0 0 12px var(--gold-glow);
+      letter-spacing: 3px;
+    }
+
+    .cd-sublabel {
+      font-size: 6px;
+      color: var(--parchment);
+      opacity: .45;
+      letter-spacing: 1px;
+    }
+
+    .date-stamp {
+      text-align: center;
+      color: var(--green);
+      font-size: clamp(7px, 2.3vw, 9px);
+      letter-spacing: 3px;
+      margin-top: 24px;
+      line-height: 2;
+      text-shadow: 2px 2px 0 #14532d;
+    }
+
+    .hearts {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 18px;
+      letter-spacing: 16px;
+      color: var(--heart);
+      filter: drop-shadow(0 0 5px rgba(220,38,38,.55));
+    }
+
+    /* ── Hidden private portal ── */
+    .lantern {
+      position: fixed; bottom: 16px; right: 16px;
+      font-size: 20px; opacity: .07;
+      transition: opacity .4s;
+      text-decoration: none; z-index: 20;
+    }
+    .lantern:hover, .lantern:active { opacity: .7; }
+
+    /* ── Desktop switch ── */
+    .view-switch {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: var(--parchment);
+      opacity: .2;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: opacity .3s;
+    }
+    .view-switch:hover { opacity: .55; }
+  </style>
+</head>
+<body>
+
+  <div id="sky"></div>
+
+  <div id="main">
+    <div class="card">
+      <div class="nail tl"></div><div class="nail tr"></div>
+      <div class="nail bl"></div><div class="nail br"></div>
+
+      <div class="names">
+        SARAH
+        <span class="connector">— &amp; —</span>
+        ALEX
+      </div>
+      <div class="subtitle">are getting married</div>
+
+      <div class="divider"></div>
+
+      <div class="cd-label">time until the big day</div>
+      <div class="countdown">
+        <div class="cd-unit">
+          <div class="cd-value" id="days">---</div>
+          <div class="cd-sublabel">days</div>
+        </div>
+        <div class="cd-unit">
+          <div class="cd-value" id="hours">--</div>
+          <div class="cd-sublabel">hrs</div>
+        </div>
+        <div class="cd-unit">
+          <div class="cd-value" id="mins">--</div>
+          <div class="cd-sublabel">min</div>
+        </div>
+        <div class="cd-unit">
+          <div class="cd-value" id="secs">--</div>
+          <div class="cd-sublabel">sec</div>
+        </div>
+      </div>
+
+      <div class="date-stamp">✦ MARCH 6<br>2027 · 5 PM ✦</div>
+      <div class="hearts">♥ ♥ ♥</div>
+    </div>
+
+    <a class="view-switch" href="desktop.html">[ desktop view ]</a>
+  </div>
+
+  <a class="lantern" href="private/">🏮</a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    // Stars (fixed position so they stay behind scroll)
+    (function () {
+      var sky = document.getElementById('sky');
+      for (var i = 0; i < 130; i++) {
+        var s = document.createElement('div');
+        var big = Math.random() < .12;
+        s.className = 'star';
+        s.style.cssText =
+          'left:'   + (Math.random()*100).toFixed(1) + '%;' +
+          'top:'    + (Math.random()*100).toFixed(1)  + '%;' +
+          'width:'  + (big ? 3 : 2) + 'px;' +
+          'height:' + (big ? 3 : 2) + 'px;' +
+          '--d:'    + (Math.random()*2.2+.7).toFixed(1) + 's;' +
+          '--dl:-'  + (Math.random()*5).toFixed(1) + 's;';
+        sky.appendChild(s);
+      }
+    })();
+
+    // Countdown
+    function tick() {
+      var target = new Date('2027-03-06T17:00:00');
+      var diff   = Math.max(0, target - Date.now());
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000)  / 60000);
+      var s = Math.floor((diff % 60000)    / 1000);
+      document.getElementById('days').textContent  = String(d).padStart(3, '0');
+      document.getElementById('hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('mins').textContent  = String(m).padStart(2, '0');
+      document.getElementById('secs').textContent  = String(s).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // Entrance
+    gsap.from('.card',       { opacity:0, y:60,   duration:1,   ease:'back.out(1.3)', delay:.2  });
+    gsap.from('.names',      { opacity:0, y:-16,  duration:.7,                        delay:.9  });
+    gsap.from('.subtitle',   { opacity:0,          duration:.6,                        delay:1.1 });
+    gsap.from('.countdown',  { opacity:0, y:12,   duration:.7,                        delay:1.3 });
+    gsap.from('.date-stamp', { opacity:0,          duration:.6,                        delay:1.6 });
+    gsap.from('.hearts',     { opacity:0, scale:.4, duration:.6, ease:'back.out(2)',  delay:1.8 });
+  </script>
+</body>
+</html>
