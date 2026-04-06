@@ -1,0 +1,148 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Design tokens ── */
+:root {
+  --sky:            #07050f;
+  --wood-dark:      #1c0e00;
+  --wood-mid:       #2b1800;
+  --wood-border:    #7a5230;
+  --wood-hi:        #b07840;
+  --parchment:      #fef3c7;
+  --gold:           #f59e0b;
+  --gold-glow:      rgba(245,158,11,0.2);
+  --heart:          #dc2626;
+  --green:          #4ade80;
+  --grass:          #15803d;
+  --grass-dark:     #166534;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background: var(--sky);
+  font-family: 'Press Start 2P', monospace;
+  overflow-x: hidden;
+  color: var(--parchment);
+}
+
+/* ── Sky ── */
+#sky {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -5%,  #1d1450 0%, transparent 65%),
+    radial-gradient(ellipse 45% 35% at 78%  8%,  #2e1860 0%, transparent 50%),
+    var(--sky);
+}
+
+/* ── Stars ── */
+.star {
+  position: fixed;
+  background: #fdf8ee;
+  animation: twinkle var(--d) ease-in-out infinite var(--dl);
+}
+@keyframes twinkle {
+  0%,100% { opacity: .12; transform: scale(1);   }
+  50%      { opacity: 1;   transform: scale(1.3); }
+}
+
+/* ── Nav ── */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; justify-content: center;
+  flex-wrap: wrap; gap: 12px 24px;
+  padding: 16px 20px;
+  background: var(--wood-dark);
+  border-bottom: 4px solid var(--wood-border);
+  box-shadow: 0 4px 20px rgba(0,0,0,.6);
+}
+.nav a {
+  color: var(--parchment);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 3px;
+  opacity: .6;
+  transition: opacity .3s, color .3s;
+}
+.nav a:hover, .nav a:active, .nav a.active {
+  opacity: 1;
+  color: var(--gold);
+}
+
+/* ── Shared wood panel components ── */
+.nail {
+  position: absolute;
+  width: 10px; height: 10px;
+  background: var(--gold);
+  box-shadow: inset -3px -3px 0 #7c5e00, inset 3px 3px 0 #fff4a0;
+}
+.nail.tl { top: 10px;    left: 10px;  }
+.nail.tr { top: 10px;    right: 10px; }
+.nail.bl { bottom: 10px; left: 10px;  }
+.nail.br { bottom: 10px; right: 10px; }
+
+/* ── Placeholder boxes ── */
+.placeholder-box {
+  width: 100%; max-width: 560px;
+  height: 200px; margin: 0 auto 40px;
+  border: 4px solid var(--wood-border);
+  background: var(--wood-dark);
+  box-shadow: inset 4px 4px 0 var(--wood-hi), inset -4px -4px 0 #0a0500;
+  display: flex; align-items: center; justify-content: center;
+}
+.placeholder-box span {
+  font-size: 7px; opacity: .3; letter-spacing: 2px;
+  text-align: center; line-height: 2;
+}
+
+/* ── Section divider ── */
+.section-divider {
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--wood-border) 0px, var(--wood-border) 8px,
+    transparent 8px, transparent 16px
+  );
+  max-width: 300px;
+  margin: 0 auto;
+  opacity: .4;
+}
+
+/* ── Wood plank divider ── */
+.divider {
+  height: 6px; margin: 24px 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--wood-border) 0px, var(--wood-border)  8px,
+    var(--wood-dark)   8px, var(--wood-dark)    16px
+  );
+}
+
+/* ── Page title (inner pages) ── */
+.page-title {
+  color: var(--gold);
+  font-size: clamp(12px, 2.5vw, 18px);
+  text-align: center;
+  text-shadow: 4px 4px 0 #5a2800;
+  margin-bottom: 48px;
+  letter-spacing: 4px;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 6px;
+  opacity: .3;
+  letter-spacing: 2px;
+  line-height: 2.5;
+}
+
+/* ── Hidden private portal ── */
+.lantern {
+  position: fixed; bottom: 16px; right: 18px;
+  font-size: 20px; opacity: .07;
+  transition: opacity .4s;
+  text-decoration: none; z-index: 60;
+}
+.lantern:hover, .lantern:active { opacity: .65; }
