@@ -69,6 +69,13 @@ html, body {
   color: var(--gold);
 }
 
+/* ── Focus states ── */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 /* ── Shared wood panel components ── */
 .nail {
   position: absolute;
