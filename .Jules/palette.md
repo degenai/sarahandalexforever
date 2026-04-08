@@ -1,0 +1,3 @@
+## 2026-04-08 - Added `aria-current="page"` and `aria-label` to icon-only links
+**Learning:** Found a common pattern across the navigation where the `class="active"` was used to visually indicate the current page, but it was missing the standard `aria-current="page"` attribute for screen readers. Also found icon-only links (lantern icons pointing to a private portal) lacking an `aria-label`, meaning screen readers would just read the unicode character name without context.
+**Action:** Added `aria-current="page"` to all `.active` nav links and `aria-label="Private access"` to the `.lantern` links. Future navigation additions should include `aria-current` for active states, and any new icon-only decorative links must have descriptive `aria-label`s.
