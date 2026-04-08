@@ -1,329 +1,390 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sarah &amp; Alex — March 6, 2027</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/shared.css">
-  <style>
-    /* ── Mobile overrides ── */
-    .nav a { font-size: 9px; letter-spacing: 2px; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sarah &amp; Alex — March 6, 2027</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/shared.css" />
+    <style>
+      /* ── Mobile overrides ── */
+      .nav a {
+        font-size: 9px;
+        letter-spacing: 2px;
+      }
 
-    .content { position: relative; z-index: 10; }
+      .content {
+        position: relative;
+        z-index: 10;
+      }
 
-    /* ── Hero ── */
-    .hero {
-      min-height: 100dvh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 80px 20px 60px;
-    }
+      /* ── Hero ── */
+      .hero {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 20px 60px;
+      }
 
-    .card {
-      position: relative;
-      background: var(--wood-mid);
-      border: 5px solid var(--wood-border);
-      box-shadow:
-        inset  5px  5px 0 var(--wood-hi),
-        inset -5px -5px 0 var(--wood-dark),
-        0 0 60px rgba(0,0,0,.85),
-        0 0 30px var(--gold-glow);
-      padding: 36px 28px 40px;
-      width: 100%;
-      max-width: 420px;
-    }
+      .card {
+        position: relative;
+        background: var(--wood-mid);
+        border: 5px solid var(--wood-border);
+        box-shadow:
+          inset 5px 5px 0 var(--wood-hi),
+          inset -5px -5px 0 var(--wood-dark),
+          0 0 60px rgba(0, 0, 0, 0.85),
+          0 0 30px var(--gold-glow);
+        padding: 36px 28px 40px;
+        width: 100%;
+        max-width: 420px;
+      }
 
-    .card .nail { width: 9px; height: 9px; }
-    .card .nail.tl { top: 9px;    left: 9px;  }
-    .card .nail.tr { top: 9px;    right: 9px; }
-    .card .nail.bl { bottom: 9px; left: 9px;  }
-    .card .nail.br { bottom: 9px; right: 9px; }
+      .card .nail {
+        width: 9px;
+        height: 9px;
+      }
+      .card .nail.tl {
+        top: 9px;
+        left: 9px;
+      }
+      .card .nail.tr {
+        top: 9px;
+        right: 9px;
+      }
+      .card .nail.bl {
+        bottom: 9px;
+        left: 9px;
+      }
+      .card .nail.br {
+        bottom: 9px;
+        right: 9px;
+      }
 
-    .names {
-      text-align: center;
-      color: var(--gold);
-      font-size: clamp(22px, 7vw, 30px);
-      line-height: 1.9;
-      text-shadow: 3px 3px 0 #5a2800;
-    }
-    .names .connector {
-      display: block;
-      font-size: .45em;
-      color: var(--parchment);
-      opacity: .75;
-      margin: 2px 0;
-    }
+      .names {
+        text-align: center;
+        color: var(--gold);
+        font-size: clamp(22px, 7vw, 30px);
+        line-height: 1.9;
+        text-shadow: 3px 3px 0 #5a2800;
+      }
+      .names .connector {
+        display: block;
+        font-size: 0.45em;
+        color: var(--parchment);
+        opacity: 0.75;
+        margin: 2px 0;
+      }
 
-    .subtitle {
-      text-align: center;
-      font-size: clamp(6px, 2.2vw, 8px);
-      letter-spacing: 3px;
-      opacity: .7;
-      margin-top: 8px;
-    }
+      .subtitle {
+        text-align: center;
+        font-size: clamp(6px, 2.2vw, 8px);
+        letter-spacing: 3px;
+        opacity: 0.7;
+        margin-top: 8px;
+      }
 
-    .divider { height: 5px; margin: 22px 0; }
+      .divider {
+        height: 5px;
+        margin: 22px 0;
+      }
 
-    .cd-label {
-      text-align: center;
-      font-size: 6px; letter-spacing: 2px;
-      opacity: .5; margin-bottom: 16px;
-      line-height: 2;
-    }
+      .cd-label {
+        text-align: center;
+        font-size: 6px;
+        letter-spacing: 2px;
+        opacity: 0.5;
+        margin-bottom: 16px;
+        line-height: 2;
+      }
 
-    .countdown {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
+      .countdown {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
 
-    .cd-unit {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 8px;
-    }
+      .cd-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
 
-    .cd-value {
-      background: #040210;
-      color: var(--gold);
-      font-size: clamp(20px, 6.5vw, 28px);
-      padding: 16px 8px;
-      width: 100%;
-      text-align: center;
-      border: 3px solid var(--wood-border);
-      box-shadow:
-        inset -3px -3px 0 #000,
-        inset  3px  3px 0 #1a1a20,
-        0 0 12px var(--gold-glow);
-      letter-spacing: 3px;
-    }
+      .cd-value {
+        background: #040210;
+        color: var(--gold);
+        font-size: clamp(20px, 6.5vw, 28px);
+        padding: 16px 8px;
+        width: 100%;
+        text-align: center;
+        border: 3px solid var(--wood-border);
+        box-shadow:
+          inset -3px -3px 0 #000,
+          inset 3px 3px 0 #1a1a20,
+          0 0 12px var(--gold-glow);
+        letter-spacing: 3px;
+      }
 
-    .cd-sublabel {
-      font-size: 6px;
-      opacity: .45;
-      letter-spacing: 1px;
-    }
+      .cd-sublabel {
+        font-size: 6px;
+        opacity: 0.45;
+        letter-spacing: 1px;
+      }
 
-    .date-stamp {
-      text-align: center;
-      color: var(--green);
-      font-size: clamp(7px, 2.3vw, 9px);
-      letter-spacing: 3px;
-      margin-top: 24px;
-      line-height: 2;
-      text-shadow: 2px 2px 0 #14532d;
-    }
+      .date-stamp {
+        text-align: center;
+        color: var(--green);
+        font-size: clamp(7px, 2.3vw, 9px);
+        letter-spacing: 3px;
+        margin-top: 24px;
+        line-height: 2;
+        text-shadow: 2px 2px 0 #14532d;
+      }
 
-    .hearts {
-      text-align: center;
-      margin-top: 16px;
-      font-size: 18px;
-      letter-spacing: 16px;
-      color: var(--heart);
-      filter: drop-shadow(0 0 5px rgba(220,38,38,.55));
-    }
+      .hearts {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 18px;
+        letter-spacing: 16px;
+        color: var(--heart);
+        filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.55));
+      }
 
-    /* ── Sections ── */
-    .section {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
+      /* ── Sections ── */
+      .section {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 60px 24px;
+      }
 
-    .section-title {
-      color: var(--gold);
-      font-size: clamp(9px, 3vw, 12px);
-      text-align: center;
-      text-shadow: 3px 3px 0 #5a2800;
-      margin-bottom: 32px;
-      letter-spacing: 3px;
-    }
+      .section-title {
+        color: var(--gold);
+        font-size: clamp(9px, 3vw, 12px);
+        text-align: center;
+        text-shadow: 3px 3px 0 #5a2800;
+        margin-bottom: 32px;
+        letter-spacing: 3px;
+      }
 
-    .placeholder-row {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-      margin-bottom: 32px;
-    }
+      .placeholder-row {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 32px;
+      }
 
-    .placeholder-row .placeholder-box {
-      max-width: 340px; height: 160px;
-      margin: 0;
-    }
+      .placeholder-row .placeholder-box {
+        max-width: 340px;
+        height: 160px;
+        margin: 0;
+      }
 
-    .section-text {
-      text-align: center;
-      font-size: 7px;
-      line-height: 2.4;
-      opacity: .6;
-      margin: 0 auto 32px;
-      letter-spacing: 1px;
-    }
+      .section-text {
+        text-align: center;
+        font-size: 7px;
+        line-height: 2.4;
+        opacity: 0.6;
+        margin: 0 auto 32px;
+        letter-spacing: 1px;
+      }
 
-    .section-divider { max-width: 200px; }
+      .section-divider {
+        max-width: 200px;
+      }
 
-    /* ── View switch ── */
-    .view-switch {
-      display: block;
-      text-align: center;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 6px;
-      color: var(--parchment);
-      opacity: .2;
-      text-decoration: none;
-      letter-spacing: 1px;
-      transition: opacity .3s;
-      padding: 12px;
-    }
-    .view-switch:hover { opacity: .55; }
-  </style>
-</head>
-<body>
+      /* ── View switch ── */
+      .view-switch {
+        display: block;
+        text-align: center;
+        font-family: "Press Start 2P", monospace;
+        font-size: 6px;
+        color: var(--parchment);
+        opacity: 0.2;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: opacity 0.3s;
+        padding: 12px;
+      }
+      .view-switch:hover {
+        opacity: 0.55;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sky" data-stars="130"></div>
 
-  <div id="sky" data-stars="130"></div>
+    <nav class="nav">
+      <a href="mobile.html" class="active">HOME</a>
+      <a href="pages/story.html">STORY</a>
+      <a href="pages/details.html">DETAILS</a>
+      <a href="pages/gallery.html">GALLERY</a>
+      <a href="pages/rsvp.html">RSVP</a>
+      <a href="pages/registry.html">REGISTRY</a>
+    </nav>
 
-  <nav class="nav">
-    <a href="mobile.html" class="active">HOME</a>
-    <a href="pages/story.html">STORY</a>
-    <a href="pages/details.html">DETAILS</a>
-    <a href="pages/gallery.html">GALLERY</a>
-    <a href="pages/rsvp.html">RSVP</a>
-    <a href="pages/registry.html">REGISTRY</a>
-  </nav>
+    <div class="content">
+      <!-- ── Hero: Countdown ── -->
+      <section class="hero">
+        <div class="card">
+          <div class="nail tl"></div>
+          <div class="nail tr"></div>
+          <div class="nail bl"></div>
+          <div class="nail br"></div>
 
-  <div class="content">
-
-    <!-- ── Hero: Countdown ── -->
-    <section class="hero">
-      <div class="card">
-        <div class="nail tl"></div><div class="nail tr"></div>
-        <div class="nail bl"></div><div class="nail br"></div>
-
-        <div class="names">
-          SARAH
-          <span class="connector">— &amp; —</span>
-          ALEX
-        </div>
-        <div class="subtitle">are getting married</div>
-
-        <div class="divider"></div>
-
-        <div class="cd-label">time until the big day</div>
-        <div class="countdown">
-          <div class="cd-unit">
-            <div class="cd-value" id="days">---</div>
-            <div class="cd-sublabel">days</div>
+          <div class="names">
+            SARAH
+            <span class="connector">— &amp; —</span>
+            ALEX
           </div>
-          <div class="cd-unit">
-            <div class="cd-value" id="hours">--</div>
-            <div class="cd-sublabel">hrs</div>
+          <div class="subtitle">are getting married</div>
+
+          <div class="divider"></div>
+
+          <div class="cd-label">time until the big day</div>
+          <div class="countdown">
+            <div class="cd-unit">
+              <div class="cd-value" id="days">---</div>
+              <div class="cd-sublabel">days</div>
+            </div>
+            <div class="cd-unit">
+              <div class="cd-value" id="hours">--</div>
+              <div class="cd-sublabel">hrs</div>
+            </div>
+            <div class="cd-unit">
+              <div class="cd-value" id="mins">--</div>
+              <div class="cd-sublabel">min</div>
+            </div>
+            <div class="cd-unit">
+              <div class="cd-value" id="secs">--</div>
+              <div class="cd-sublabel">sec</div>
+            </div>
           </div>
-          <div class="cd-unit">
-            <div class="cd-value" id="mins">--</div>
-            <div class="cd-sublabel">min</div>
+
+          <div class="date-stamp">✦ MARCH 6<br />2027 · 5 PM ✦</div>
+          <div class="hearts">♥ ♥ ♥</div>
+        </div>
+      </section>
+
+      <!-- ── Welcome section ── -->
+      <section class="section">
+        <div class="section-title">✦ WELCOME ✦</div>
+        <div class="section-text">
+          We can't wait to celebrate with you!<br />
+          More details coming soon.
+        </div>
+        <div class="placeholder-row">
+          <div class="placeholder-box">
+            <span>[ photo or art ]</span>
           </div>
-          <div class="cd-unit">
-            <div class="cd-value" id="secs">--</div>
-            <div class="cd-sublabel">sec</div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ── Quick details preview ── -->
+      <section class="section">
+        <div class="section-title">✦ THE BIG DAY ✦</div>
+        <div class="placeholder-row">
+          <div class="placeholder-box">
+            <span>[ venue photo<br />or pixel art ]</span>
+          </div>
+          <div class="placeholder-box">
+            <span>[ map or<br />directions art ]</span>
           </div>
         </div>
-
-        <div class="date-stamp">✦ MARCH 6<br>2027 · 5 PM ✦</div>
-        <div class="hearts">♥ ♥ ♥</div>
-      </div>
-    </section>
-
-    <!-- ── Welcome section ── -->
-    <section class="section">
-      <div class="section-title">✦ WELCOME ✦</div>
-      <div class="section-text">
-        We can't wait to celebrate with you!<br>
-        More details coming soon.
-      </div>
-      <div class="placeholder-row">
-        <div class="placeholder-box">
-          <span>[ photo or art ]</span>
+        <div class="section-text">
+          March 6, 2027 at 5:00 PM<br />
+          Butterfly Pavilion
         </div>
-      </div>
-    </section>
+      </section>
 
-    <div class="section-divider"></div>
+      <div class="section-divider"></div>
 
-    <!-- ── Quick details preview ── -->
-    <section class="section">
-      <div class="section-title">✦ THE BIG DAY ✦</div>
-      <div class="placeholder-row">
-        <div class="placeholder-box">
-          <span>[ venue photo<br>or pixel art ]</span>
+      <!-- ── Gallery preview ── -->
+      <section class="section">
+        <div class="section-title">✦ SNEAK PEEK ✦</div>
+        <div class="placeholder-row">
+          <div class="placeholder-box">
+            <span>[ photo ]</span>
+          </div>
+          <div class="placeholder-box">
+            <span>[ photo ]</span>
+          </div>
+          <div class="placeholder-box">
+            <span>[ photo ]</span>
+          </div>
         </div>
-        <div class="placeholder-box">
-          <span>[ map or<br>directions art ]</span>
-        </div>
-      </div>
-      <div class="section-text">
-        March 6, 2027 at 5:00 PM<br>
-        Butterfly Pavilion
-      </div>
-    </section>
+      </section>
 
-    <div class="section-divider"></div>
+      <!-- ── Footer ── -->
+      <footer class="footer">
+        SARAH &amp; ALEX · MARCH 6, 2027<br />
+        ♥
+        <br /><br />
+        <a class="view-switch" href="desktop.html">[ desktop view ]</a>
+      </footer>
+    </div>
 
-    <!-- ── Gallery preview ── -->
-    <section class="section">
-      <div class="section-title">✦ SNEAK PEEK ✦</div>
-      <div class="placeholder-row">
-        <div class="placeholder-box">
-          <span>[ photo ]</span>
-        </div>
-        <div class="placeholder-box">
-          <span>[ photo ]</span>
-        </div>
-        <div class="placeholder-box">
-          <span>[ photo ]</span>
-        </div>
-      </div>
-    </section>
+    <a class="lantern" href="private/">&#x1F3EE;</a>
 
-    <!-- ── Footer ── -->
-    <footer class="footer">
-      SARAH &amp; ALEX · MARCH 6, 2027<br>
-      ♥
-      <br><br>
-      <a class="view-switch" href="desktop.html">[ desktop view ]</a>
-    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="assets/js/stars.js"></script>
+    <script>
+      // Countdown
+      function tick() {
+        var target = new Date("2027-03-06T17:00:00");
+        var diff = Math.max(0, target - Date.now());
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        document.getElementById("days").textContent = String(d).padStart(
+          3,
+          "0",
+        );
+        document.getElementById("hours").textContent = String(h).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("mins").textContent = String(m).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("secs").textContent = String(s).padStart(
+          2,
+          "0",
+        );
+      }
+      tick();
+      setInterval(tick, 1000);
 
-  </div>
-
-  <a class="lantern" href="private/">&#x1F3EE;</a>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="assets/js/stars.js"></script>
-  <script>
-    // Countdown
-    function tick() {
-      var target = new Date('2027-03-06T17:00:00');
-      var diff   = Math.max(0, target - Date.now());
-      var d = Math.floor(diff / 86400000);
-      var h = Math.floor((diff % 86400000) / 3600000);
-      var m = Math.floor((diff % 3600000)  / 60000);
-      var s = Math.floor((diff % 60000)    / 1000);
-      document.getElementById('days').textContent  = String(d).padStart(3, '0');
-      document.getElementById('hours').textContent = String(h).padStart(2, '0');
-      document.getElementById('mins').textContent  = String(m).padStart(2, '0');
-      document.getElementById('secs').textContent  = String(s).padStart(2, '0');
-    }
-    tick();
-    setInterval(tick, 1000);
-
-    // Entrance
-    gsap.from('.card',       { opacity:0, y:60,   duration:1,   ease:'back.out(1.3)', delay:.2  });
-    gsap.from('.names',      { opacity:0, y:-16,  duration:.7,                        delay:.9  });
-    gsap.from('.subtitle',   { opacity:0,          duration:.6,                        delay:1.1 });
-    gsap.from('.countdown',  { opacity:0, y:12,   duration:.7,                        delay:1.3 });
-    gsap.from('.date-stamp', { opacity:0,          duration:.6,                        delay:1.6 });
-    gsap.from('.hearts',     { opacity:0, scale:.4, duration:.6, ease:'back.out(2)',  delay:1.8 });
-  </script>
-</body>
+      // Entrance
+      gsap.from(".card", {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: "back.out(1.3)",
+        delay: 0.2,
+      });
+      gsap.from(".names", { opacity: 0, y: -16, duration: 0.7, delay: 0.9 });
+      gsap.from(".subtitle", { opacity: 0, duration: 0.6, delay: 1.1 });
+      gsap.from(".countdown", { opacity: 0, y: 12, duration: 0.7, delay: 1.3 });
+      gsap.from(".date-stamp", { opacity: 0, duration: 0.6, delay: 1.6 });
+      gsap.from(".hearts", {
+        opacity: 0,
+        scale: 0.4,
+        duration: 0.6,
+        ease: "back.out(2)",
+        delay: 1.8,
+      });
+    </script>
+  </body>
 </html>
