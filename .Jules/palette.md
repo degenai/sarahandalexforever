@@ -1,3 +1,5 @@
 ## 2024-10-24 - Accessibility Fixes for Static Pages
 **Learning:** Found that custom visual styles often strip out native focus indicators, making keyboard navigation difficult. Also, decorative elements acting as links (like the lantern) need explicit ARIA labels to be meaningful to screen readers.
-**Action:** Always verify keyboard focus state (`:focus-visible`) when overriding default link styles, and always add `aria-label` to icon-only interactive elements. Use `aria-current` for navigation states.
+**Action:** Always verify keyboard focus state (`:focus-visible`) when overriding default link styles, and always add `aria-label` to icon-only interactive elements. Use `aria-current` for navigation states.## 2024-10-25 - Skip Links for Sticky Headers
+**Learning:** For sites with fixed or sticky top navigation (like this one's `.nav`), keyboard-only and screen reader users are forced to tab through every single navigation item on every page load before reaching main content.
+**Action:** Always implement a visually hidden "Skip to Content" link immediately after the `<body>` tag that targets a `<main>` container with `tabindex="-1"`. This provides a significant usability improvement for keyboard navigation.
