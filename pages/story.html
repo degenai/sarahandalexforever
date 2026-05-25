@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Story · Sarah &amp; Alex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/shared.css">
   <style>
     .content {
@@ -15,21 +15,42 @@
     }
 
     .story-text {
+      font-family: 'Lora', Georgia, serif;
       text-align: center;
-      font-size: 11px; line-height: 2.2;
-      opacity: .82;
-      max-width: 620px;
-      margin: 0 auto 48px;
-      letter-spacing: 1px;
+      font-size: 17px; line-height: 1.7;
+      opacity: .92;
+      color: var(--parchment);
+      max-width: 600px;
+      margin: 0 auto 64px;
+      letter-spacing: 0;
     }
-    .story-text p { margin-bottom: 28px; }
+    .story-text p { margin-bottom: 22px; }
     .story-text p:last-child { margin-bottom: 0; }
+
+    .portrait-frame {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto 56px;
+      padding: 16px;
+      background: var(--wood-mid);
+      border: 6px solid var(--wood-border);
+      box-shadow:
+        inset 4px 4px 0 var(--wood-hi),
+        inset -4px -4px 0 #0a0500,
+        0 0 40px var(--gold-glow);
+    }
+    .portrait-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
     .video-section-title {
       color: var(--gold);
       font-size: clamp(9px, 2vw, 12px);
       text-align: center;
       text-shadow: 3px 3px 0 #5a2800;
+      margin-top: 56px;
       margin-bottom: 32px;
       letter-spacing: 3px;
     }
@@ -66,8 +87,8 @@
   <div class="content">
     <div class="page-title">✦ OUR STORY ✦</div>
 
-    <div class="placeholder-box">
-      <span>[ photo of sarah &amp; alex ]</span>
+    <div class="portrait-frame">
+      <img src="../assets/img/stardew-portrait.png" alt="Sarah and Alex as Stardew Valley pixel-art characters">
     </div>
 
     <div class="story-text">
