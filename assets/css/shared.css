@@ -180,6 +180,197 @@ a:focus-visible, button:focus-visible {
   line-height: 2.5;
 }
 
+/* ── Form components (RSVP, guestbook, contact) ── */
+.form-card {
+  position: relative;
+  background: var(--wood-mid);
+  border: 5px solid var(--wood-border);
+  box-shadow:
+    inset  5px  5px 0 var(--wood-hi),
+    inset -5px -5px 0 var(--wood-dark),
+    0 0 40px rgba(0,0,0,.6),
+    0 0 20px var(--gold-glow);
+  padding: 36px 28px;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 28px;
+  text-shadow: 2px 2px 0 #5a2800;
+}
+
+.pixel-field { margin-bottom: 22px; }
+
+.pixel-label {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 0 #5a2800;
+}
+.pixel-label .req {
+  color: var(--heart);
+  margin-left: 4px;
+}
+
+.pixel-input,
+.pixel-textarea,
+.pixel-select {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--parchment);
+  background: #040210;
+  border: 3px solid var(--wood-border);
+  box-shadow:
+    inset  2px  2px 0 #000,
+    inset -2px -2px 0 #1a1a20;
+  padding: 14px 12px;
+  width: 100%;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  line-height: 1.6;
+}
+.pixel-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.pixel-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+                    linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position: calc(100% - 16px) center, calc(100% - 10px) center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 32px;
+}
+.pixel-input:focus,
+.pixel-textarea:focus,
+.pixel-select:focus {
+  border-color: var(--gold);
+  box-shadow:
+    inset  2px  2px 0 #000,
+    inset -2px -2px 0 #1a1a20,
+    0 0 12px var(--gold-glow);
+}
+.pixel-input::placeholder,
+.pixel-textarea::placeholder {
+  color: var(--parchment);
+  opacity: .25;
+}
+
+.yn-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.yn-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--parchment);
+  background: var(--wood-dark);
+  border: 3px solid var(--wood-border);
+  box-shadow:
+    inset  2px  2px 0 var(--wood-hi),
+    inset -2px -2px 0 #0a0500;
+  padding: 16px 10px;
+  cursor: pointer;
+  transition: color .2s, box-shadow .2s;
+  text-align: center;
+  line-height: 1.6;
+}
+.yn-btn:hover { color: var(--gold); }
+.yn-btn.active.yes {
+  color: var(--green);
+  box-shadow:
+    inset  2px  2px 0 var(--wood-hi),
+    inset -2px -2px 0 #0a0500,
+    0 0 14px rgba(74,222,128,.4);
+  text-shadow: 1px 1px 0 #14532d;
+}
+.yn-btn.active.no {
+  color: var(--gold);
+  box-shadow:
+    inset  2px  2px 0 var(--wood-hi),
+    inset -2px -2px 0 #0a0500,
+    0 0 14px var(--gold-glow);
+}
+
+.pixel-submit {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  background: var(--wood-dark);
+  border: 4px solid var(--wood-border);
+  box-shadow:
+    inset  3px  3px 0 var(--wood-hi),
+    inset -3px -3px 0 #0a0500,
+    0 0 20px var(--gold-glow);
+  padding: 20px 32px;
+  width: 100%;
+  cursor: pointer;
+  text-shadow: 2px 2px 0 #5a2800;
+  transition: transform .08s, box-shadow .2s;
+  margin-top: 12px;
+}
+.pixel-submit:hover {
+  box-shadow:
+    inset  3px  3px 0 var(--wood-hi),
+    inset -3px -3px 0 #0a0500,
+    0 0 32px var(--gold-glow);
+}
+.pixel-submit:active { transform: translateY(2px); }
+.pixel-submit:disabled {
+  opacity: .5;
+  cursor: wait;
+}
+
+.success-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+.success-state .check {
+  font-size: 32px;
+  color: var(--green);
+  filter: drop-shadow(0 0 10px rgba(74,222,128,.6));
+  margin-bottom: 16px;
+}
+.success-state .msg {
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 0 #14532d;
+  margin-bottom: 12px;
+}
+.success-state .sub {
+  font-size: 7px;
+  opacity: .6;
+  letter-spacing: 1px;
+  line-height: 2;
+}
+
+.error-state {
+  text-align: center;
+  padding: 24px 20px;
+  margin-top: 16px;
+  border: 3px solid var(--heart);
+  background: rgba(220,38,38,.08);
+}
+.error-state .msg {
+  color: var(--heart);
+  font-size: 8px;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+
 /* ── Hidden private portal ── */
 .lantern {
   position: fixed; bottom: 16px; right: 18px;

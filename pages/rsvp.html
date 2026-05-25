@@ -10,34 +10,14 @@
   <style>
     .content {
       position: relative; z-index: 10;
-      max-width: 550px; margin: 0 auto;
+      max-width: 560px; margin: 0 auto;
       padding: 60px 28px 80px;
     }
-
-    .rsvp-card {
-      position: relative;
-      background: var(--wood-mid);
-      border: 5px solid var(--wood-border);
-      box-shadow:
-        inset 5px 5px 0 var(--wood-hi),
-        inset -5px -5px 0 var(--wood-dark),
-        0 0 40px rgba(0,0,0,.6),
-        0 0 20px var(--gold-glow);
-      padding: 40px 32px;
+    .rsvp-intro {
       text-align: center;
-    }
-
-    .rsvp-text {
-      font-size: 8px; line-height: 2.6;
-      opacity: .7; letter-spacing: 1px;
-      margin-bottom: 24px;
-    }
-
-    .rsvp-coming {
-      color: var(--green);
-      font-size: 7px;
-      letter-spacing: 3px;
-      text-shadow: 2px 2px 0 #14532d;
+      font-size: 7px; line-height: 2.4;
+      opacity: .6; letter-spacing: 1px;
+      margin-bottom: 32px;
     }
   </style>
 </head>
@@ -56,13 +36,88 @@
   <div class="content">
     <div class="page-title">✦ RSVP ✦</div>
 
-    <div class="rsvp-card">
-      <div class="rsvp-text">
-        RSVP form coming soon!<br>
-        We'll let you know when<br>
-        it's ready.
+    <div class="rsvp-intro">
+      We can't wait to celebrate with you.<br>
+      Please reply below.
+    </div>
+
+    <!--
+      TODO: replace the action URL below with your real Formspree endpoint.
+      Sign up at formspree.io, create a new form, copy the endpoint
+      (it looks like https://formspree.io/f/xqyzabcd), paste it as the
+      value of `action` on the next line.
+    -->
+    <form id="rsvp-form" class="form-card"
+          action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID"
+          method="POST">
+      <div class="nail tl"></div><div class="nail tr"></div>
+      <div class="nail bl"></div><div class="nail br"></div>
+
+      <div class="card-header">✦ KINDLY REPLY ✦</div>
+
+      <div class="pixel-field">
+        <label class="pixel-label" for="rsvp-name">YOUR NAME <span class="req">*</span></label>
+        <input class="pixel-input" id="rsvp-name" name="name" type="text" placeholder="JANE & JOHN DOE" required autocomplete="name">
       </div>
-      <div class="rsvp-coming">✦ STAY TUNED ✦</div>
+
+      <div class="pixel-field">
+        <label class="pixel-label" for="rsvp-email">EMAIL <span class="req">*</span></label>
+        <input class="pixel-input" id="rsvp-email" name="email" type="email" placeholder="YOU@EXAMPLE.COM" required autocomplete="email">
+      </div>
+
+      <div class="pixel-field">
+        <label class="pixel-label">WILL YOU ATTEND? <span class="req">*</span></label>
+        <div class="yn-toggle" data-toggle="rsvp-attending">
+          <button type="button" class="yn-btn yes" data-val="yes">JOYFULLY<br>ATTENDING</button>
+          <button type="button" class="yn-btn no" data-val="no">REGRETFULLY<br>DECLINING</button>
+        </div>
+        <input type="hidden" name="attending" id="rsvp-attending" required>
+      </div>
+
+      <div class="pixel-field">
+        <label class="pixel-label" for="rsvp-party">PARTY SIZE (INCLUDING YOU)</label>
+        <select class="pixel-select" id="rsvp-party" name="party_size">
+          <option>1</option><option>2</option><option>3</option>
+          <option>4</option><option>5</option><option>6+</option>
+        </select>
+      </div>
+
+      <div class="pixel-field">
+        <label class="pixel-label" for="rsvp-diet">DIETARY NOTES</label>
+        <textarea class="pixel-textarea" id="rsvp-diet" name="dietary" placeholder="ALLERGIES, RESTRICTIONS, ETC."></textarea>
+      </div>
+
+      <div class="pixel-field">
+        <label class="pixel-label" for="rsvp-song">SONG REQUEST</label>
+        <input class="pixel-input" id="rsvp-song" name="song" type="text" placeholder="WHAT GETS YOU ON THE DANCE FLOOR?">
+      </div>
+
+      <div class="pixel-field">
+        <label class="pixel-label" for="rsvp-note">NOTE TO THE COUPLE</label>
+        <textarea class="pixel-textarea" id="rsvp-note" name="note" placeholder="SAY HI, LEAVE A WISH..."></textarea>
+      </div>
+
+      <div class="pixel-field">
+        <label class="pixel-label" for="rsvp-addr">MAILING ADDRESS</label>
+        <textarea class="pixel-textarea" id="rsvp-addr" name="address" placeholder="FOR THANK-YOU CARDS"></textarea>
+      </div>
+
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+      <input type="hidden" name="_subject" value="New RSVP — sarahandalexforever">
+
+      <button class="pixel-submit" type="submit" id="rsvp-submit">SEND RSVP</button>
+
+      <div id="rsvp-error" class="error-state" style="display:none">
+        <div class="msg">Something went wrong. Please try again, or email us directly.</div>
+      </div>
+    </form>
+
+    <div id="rsvp-success" class="form-card success-state" style="display:none">
+      <div class="nail tl"></div><div class="nail tr"></div>
+      <div class="nail bl"></div><div class="nail br"></div>
+      <div class="check">♥</div>
+      <div class="msg">RSVP SENT</div>
+      <div class="sub">Thank you — we can't wait to see you.<br>See you March 6, 2027.</div>
     </div>
   </div>
 
@@ -71,5 +126,57 @@
   </footer>
 
   <script src="../assets/js/stars.js"></script>
+  <script>
+    // Yes/No toggle
+    document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
+      var hidden = document.getElementById(toggle.getAttribute('data-toggle'));
+      toggle.querySelectorAll('.yn-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          toggle.querySelectorAll('.yn-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          if (hidden) hidden.value = btn.getAttribute('data-val');
+        });
+      });
+    });
+
+    // AJAX submit — keeps guests on the page, shows pixel-art success state
+    var form    = document.getElementById('rsvp-form');
+    var submit  = document.getElementById('rsvp-submit');
+    var errorEl = document.getElementById('rsvp-error');
+    var success = document.getElementById('rsvp-success');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorEl.style.display = 'none';
+
+      if (!document.getElementById('rsvp-attending').value) {
+        errorEl.querySelector('.msg').textContent = 'Please choose Attending or Declining.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'SENDING...';
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error('Submit failed');
+        }
+      }).catch(function () {
+        submit.disabled = false;
+        submit.textContent = 'SEND RSVP';
+        errorEl.querySelector('.msg').textContent = 'Something went wrong. Please try again, or email us directly.';
+        errorEl.style.display = 'block';
+      });
+    });
+  </script>
 </body>
 </html>
