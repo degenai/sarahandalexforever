@@ -101,6 +101,12 @@ a:focus-visible, button:focus-visible {
   font-size: 7px; opacity: .3; letter-spacing: 2px;
   text-align: center; line-height: 2;
 }
+.placeholder-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* ── Calendar buttons ── */
 .cal-row {
