@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sarah and Alex//Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:sarah-alex-wedding-2027-03-06@sarahandalexforever
+DTSTAMP:20260525T000000Z
+DTSTART:20270306T220000Z
+DTEND:20270307T040000Z
+SUMMARY:Sarah & Alex's Wedding
+DESCRIPTION:Join us as Sarah & Alex tie the knot! Ceremony at 5 PM\, reception to follow. More details at sarahandalexforever.
+LOCATION:Butterfly Pavilion
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

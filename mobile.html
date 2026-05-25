@@ -232,6 +232,16 @@
 
         <div class="date-stamp">✦ MARCH 6<br>2027 · 5 PM ✦</div>
         <div class="hearts">♥ ♥ ♥</div>
+
+        <div class="cd-label" style="margin-top: 20px;">save the date</div>
+        <div class="cal-row">
+          <a class="cal-btn"
+             href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sarah%20%26%20Alex%27s%20Wedding&dates=20270306T220000Z/20270307T040000Z&details=Join%20us%20as%20Sarah%20%26%20Alex%20tie%20the%20knot%21%20Ceremony%20at%205%20PM%2C%20reception%20to%20follow.&location=Butterfly%20Pavilion"
+             target="_blank" rel="noopener">+ GOOGLE</a>
+          <a class="cal-btn"
+             href="assets/sarah-alex-wedding.ics"
+             download="sarah-alex-wedding.ics">+ APPLE / .ICS</a>
+        </div>
       </div>
     </section>
 
@@ -324,6 +334,7 @@
     gsap.from('.countdown',  { opacity:0, y:12,   duration:.7,                        delay:1.3 });
     gsap.from('.date-stamp', { opacity:0,          duration:.6,                        delay:1.6 });
     gsap.from('.hearts',     { opacity:0, scale:.4, duration:.6, ease:'back.out(2)',  delay:1.8 });
+    gsap.from('.cal-row',    { opacity:0, y:10,    duration:.6,                        delay:2.0 });
   </script>
 </body>
 </html>

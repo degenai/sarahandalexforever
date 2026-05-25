@@ -102,6 +102,41 @@ a:focus-visible, button:focus-visible {
   text-align: center; line-height: 2;
 }
 
+/* ── Calendar buttons ── */
+.cal-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.cal-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: var(--parchment);
+  background: var(--wood-dark);
+  border: 3px solid var(--wood-border);
+  box-shadow:
+    inset  2px  2px 0 var(--wood-hi),
+    inset -2px -2px 0 #0a0500;
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: color .2s, box-shadow .2s, transform .08s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.cal-btn:hover, .cal-btn:focus-visible {
+  color: var(--gold);
+  box-shadow:
+    inset  2px  2px 0 var(--wood-hi),
+    inset -2px -2px 0 #0a0500,
+    0 0 12px var(--gold-glow);
+}
+.cal-btn:active { transform: translateY(1px); }
+
 /* ── Section divider ── */
 .section-divider {
   height: 4px;
