@@ -296,11 +296,12 @@ a:focus-visible, button:focus-visible {
   text-shadow: 1px 1px 0 #14532d;
 }
 .yn-btn.active.no {
-  color: var(--gold);
+  color: var(--heart);
   box-shadow:
     inset  2px  2px 0 var(--wood-hi),
     inset -2px -2px 0 #0a0500,
-    0 0 14px var(--gold-glow);
+    0 0 14px rgba(220,38,38,.45);
+  text-shadow: 1px 1px 0 #5a0e0e;
 }
 
 .pixel-submit {

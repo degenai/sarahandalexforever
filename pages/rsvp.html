@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RSVP — Sarah &amp; Alex</title>
+  <title>RSVP · Sarah &amp; Alex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/shared.css">
@@ -41,14 +41,8 @@
       Please reply below.
     </div>
 
-    <!--
-      TODO: replace the action URL below with your real Formspree endpoint.
-      Sign up at formspree.io, create a new form, copy the endpoint
-      (it looks like https://formspree.io/f/xqyzabcd), paste it as the
-      value of `action` on the next line.
-    -->
     <form id="rsvp-form" class="form-card"
-          action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID"
+          action="https://formspree.io/f/mqejyqrv"
           method="POST">
       <div class="nail tl"></div><div class="nail tr"></div>
       <div class="nail bl"></div><div class="nail br"></div>
@@ -103,7 +97,7 @@
       </div>
 
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
-      <input type="hidden" name="_subject" value="New RSVP — sarahandalexforever">
+      <input type="hidden" name="_subject" value="New RSVP from sarahandalexforever">
 
       <button class="pixel-submit" type="submit" id="rsvp-submit">SEND RSVP</button>
 
@@ -117,7 +111,7 @@
       <div class="nail bl"></div><div class="nail br"></div>
       <div class="check">♥</div>
       <div class="msg">RSVP SENT</div>
-      <div class="sub">Thank you — we can't wait to see you.<br>See you March 6, 2027.</div>
+      <div class="sub">Thank you. We can't wait to see you.<br>See you March 6, 2027.</div>
     </div>
   </div>
 
@@ -126,8 +120,19 @@
   </footer>
 
   <script src="../assets/js/stars.js"></script>
-  <script>
-    // Yes/No toggle
+  <script type="module">
+    import { animate, stagger, createSpring } from 'https://cdn.jsdelivr.net/npm/animejs@4/+esm';
+
+    // Entrance: stagger form fields and submit button in
+    animate('#rsvp-form .pixel-field, #rsvp-form .pixel-submit', {
+      opacity: [0, 1],
+      y: [-10, 0],
+      delay: stagger(45, { start: 120 }),
+      duration: 500,
+      ease: 'outQuad'
+    });
+
+    // Yes/No toggle with bounce on click
     document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
       var hidden = document.getElementById(toggle.getAttribute('data-toggle'));
       toggle.querySelectorAll('.yn-btn').forEach(function (btn) {
@@ -135,11 +140,16 @@
           toggle.querySelectorAll('.yn-btn').forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
           if (hidden) hidden.value = btn.getAttribute('data-val');
+          animate(btn, {
+            scale: [1, 1.12, 1],
+            duration: 340,
+            ease: 'outQuad'
+          });
         });
       });
     });
 
-    // AJAX submit — keeps guests on the page, shows pixel-art success state
+    // AJAX submit, keeps guests on the page, shows pixel-art success state
     var form    = document.getElementById('rsvp-form');
     var submit  = document.getElementById('rsvp-submit');
     var errorEl = document.getElementById('rsvp-error');
@@ -166,6 +176,12 @@
         if (res.ok) {
           form.style.display = 'none';
           success.style.display = 'block';
+          animate('#rsvp-success', {
+            scale: [0.85, 1],
+            opacity: [0, 1],
+            ease: createSpring({ mass: 1, stiffness: 110, damping: 13 }),
+            duration: 700
+          });
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
           throw new Error('Submit failed');
