@@ -361,5 +361,35 @@
     gsap.from('.hearts',     { opacity:0, scale:.4, duration:.6, ease:'back.out(2)', delay:1.9 });
     gsap.from('.cal-row',    { opacity:0, y:10,  duration:.6,                        delay:2.1 });
   </script>
+  <script>
+    // Fade the grass strip out as the user scrolls past it.
+    // Full opacity while grass is in lower half of viewport; fades to 0 as it exits the top.
+    (function () {
+      var grass = document.querySelector('.grass-strip');
+      if (!grass) return;
+      var ticking = false;
+      function update() {
+        var rect = grass.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var fadeStart = vh * 0.85;
+        var fadeEnd   = vh * 0.45;
+        var b = rect.bottom;
+        var opacity = b >= fadeStart ? 1
+                    : b <= fadeEnd   ? 0
+                    : (b - fadeEnd) / (fadeStart - fadeEnd);
+        grass.style.opacity = opacity.toFixed(3);
+        ticking = false;
+      }
+      function onScrollOrResize() {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScrollOrResize, { passive: true });
+      window.addEventListener('resize', onScrollOrResize, { passive: true });
+      update();
+    })();
+  </script>
 </body>
 </html>
