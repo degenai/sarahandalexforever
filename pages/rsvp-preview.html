@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP Preview — Sarah &amp; Alex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <style>
+    /* ── Layout ── */
+    .content {
+      position: relative; z-index: 10;
+      max-width: 720px; margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .preview-intro {
+      font-size: 8px; line-height: 2.4;
+      opacity: .7; letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .preview-intro p { margin-bottom: 16px; }
+    .preview-intro strong { color: var(--gold); }
+
+    /* ── Option section wrapper ── */
+    .option-section {
+      margin: 64px 0;
+      padding-top: 32px;
+      border-top: 2px dashed var(--wood-border);
+    }
+    .option-header {
+      display: flex; align-items: center;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .option-tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--wood-dark);
+      font-size: 10px;
+      padding: 8px 12px;
+      letter-spacing: 2px;
+      box-shadow: inset -2px -2px 0 #7c5e00, inset 2px 2px 0 #fff4a0;
+    }
+    .option-name {
+      color: var(--gold);
+      font-size: clamp(10px, 1.6vw, 13px);
+      letter-spacing: 3px;
+      text-shadow: 3px 3px 0 #5a2800;
+    }
+    .option-meta {
+      text-align: center;
+      font-size: 7px; line-height: 2.4;
+      color: var(--parchment);
+      opacity: .55;
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+    .option-meta .label { color: var(--green); }
+    .mock-note {
+      text-align: center;
+      font-size: 7px; line-height: 2.2;
+      color: var(--parchment);
+      opacity: .45;
+      letter-spacing: 1px;
+      margin: 0 auto 20px;
+      max-width: 480px;
+      font-style: italic;
+    }
+
+    /* ── Pixel-art form fields (A1 + A2) ── */
+    .rsvp-form-card {
+      position: relative;
+      background: var(--wood-mid);
+      border: 5px solid var(--wood-border);
+      box-shadow:
+        inset 5px 5px 0 var(--wood-hi),
+        inset -5px -5px 0 var(--wood-dark),
+        0 0 40px rgba(0,0,0,.6),
+        0 0 20px var(--gold-glow);
+      padding: 36px 28px;
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-align: center;
+      margin-bottom: 28px;
+      text-shadow: 2px 2px 0 #5a2800;
+    }
+
+    .pixel-field { margin-bottom: 22px; }
+
+    .pixel-label {
+      display: block;
+      font-size: 7px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 0 #5a2800;
+    }
+    .pixel-label .req {
+      color: var(--heart);
+      margin-left: 4px;
+    }
+
+    .pixel-input,
+    .pixel-textarea,
+    .pixel-select {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      color: var(--parchment);
+      background: #040210;
+      border: 3px solid var(--wood-border);
+      box-shadow:
+        inset 2px 2px 0 #000,
+        inset -2px -2px 0 #1a1a20;
+      padding: 14px 12px;
+      width: 100%;
+      letter-spacing: 1px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      line-height: 1.6;
+    }
+    .pixel-textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: 'Press Start 2P', monospace;
+    }
+    .pixel-select {
+      appearance: none;
+      cursor: pointer;
+      background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+                        linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+      background-position: calc(100% - 16px) center, calc(100% - 10px) center;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 32px;
+    }
+    .pixel-input:focus,
+    .pixel-textarea:focus,
+    .pixel-select:focus {
+      border-color: var(--gold);
+      box-shadow:
+        inset 2px 2px 0 #000,
+        inset -2px -2px 0 #1a1a20,
+        0 0 12px var(--gold-glow);
+    }
+    .pixel-input::placeholder,
+    .pixel-textarea::placeholder {
+      color: var(--parchment);
+      opacity: .25;
+    }
+
+    /* ── Yes/No toggle ── */
+    .yn-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .yn-btn {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--parchment);
+      background: var(--wood-dark);
+      border: 3px solid var(--wood-border);
+      box-shadow:
+        inset 2px 2px 0 var(--wood-hi),
+        inset -2px -2px 0 #0a0500;
+      padding: 16px 10px;
+      cursor: pointer;
+      transition: color .2s, box-shadow .2s, background .2s;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .yn-btn:hover { color: var(--gold); }
+    .yn-btn.active.yes {
+      color: var(--green);
+      box-shadow:
+        inset 2px 2px 0 var(--wood-hi),
+        inset -2px -2px 0 #0a0500,
+        0 0 14px rgba(74,222,128,.4);
+      text-shadow: 1px 1px 0 #14532d;
+    }
+    .yn-btn.active.no {
+      color: var(--gold);
+      box-shadow:
+        inset 2px 2px 0 var(--wood-hi),
+        inset -2px -2px 0 #0a0500,
+        0 0 14px var(--gold-glow);
+    }
+
+    /* ── Submit button ── */
+    .pixel-submit {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      background: var(--wood-dark);
+      border: 4px solid var(--wood-border);
+      box-shadow:
+        inset 3px 3px 0 var(--wood-hi),
+        inset -3px -3px 0 #0a0500,
+        0 0 20px var(--gold-glow);
+      padding: 20px 32px;
+      width: 100%;
+      cursor: pointer;
+      text-shadow: 2px 2px 0 #5a2800;
+      transition: transform .08s, box-shadow .2s;
+      margin-top: 12px;
+    }
+    .pixel-submit:hover {
+      box-shadow:
+        inset 3px 3px 0 var(--wood-hi),
+        inset -3px -3px 0 #0a0500,
+        0 0 32px var(--gold-glow);
+    }
+    .pixel-submit:active { transform: translateY(2px); }
+
+    /* ── Inline success state ── */
+    .success-state {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-state .check {
+      font-size: 32px;
+      color: var(--green);
+      filter: drop-shadow(0 0 10px rgba(74,222,128,.6));
+      margin-bottom: 16px;
+    }
+    .success-state .msg {
+      color: var(--green);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 0 #14532d;
+      margin-bottom: 12px;
+    }
+    .success-state .sub {
+      font-size: 7px;
+      opacity: .5;
+      letter-spacing: 1px;
+      line-height: 2;
+    }
+
+    /* ── Google Form mock (B1 + B2) ── */
+    .gform-mock {
+      background: #fff;
+      color: #202124;
+      font-family: 'Roboto', Arial, sans-serif;
+      border-radius: 8px;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,.15);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .gform-banner {
+      height: 12px;
+      background: #673ab7;
+    }
+    .gform-title-card {
+      padding: 24px 24px 28px;
+      border-bottom: 1px solid #dadce0;
+    }
+    .gform-title {
+      font-size: 22px;
+      font-weight: 400;
+      color: #202124;
+      margin-bottom: 8px;
+      letter-spacing: 0;
+    }
+    .gform-desc {
+      font-size: 14px;
+      color: #5f6368;
+      margin-bottom: 12px;
+    }
+    .gform-required-note {
+      font-size: 13px;
+      color: #d93025;
+      margin-top: 16px;
+    }
+    .gform-question {
+      padding: 24px;
+      border-bottom: 1px solid #dadce0;
+    }
+    .gform-q-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #202124;
+      margin-bottom: 12px;
+    }
+    .gform-q-text .star { color: #d93025; margin-left: 2px; }
+    .gform-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #80868b;
+      padding: 4px 0;
+      font-size: 14px;
+      color: #202124;
+      font-family: 'Roboto', Arial, sans-serif;
+      outline: none;
+      background: transparent;
+    }
+    .gform-input:focus { border-bottom: 2px solid #673ab7; }
+    .gform-input::placeholder { color: #80868b; opacity: 1; }
+    .gform-radio-row {
+      display: flex; align-items: center;
+      padding: 6px 0;
+      font-size: 14px;
+      color: #202124;
+    }
+    .gform-radio-circle {
+      width: 18px; height: 18px;
+      border: 2px solid #5f6368;
+      border-radius: 50%;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .gform-radio-row.selected .gform-radio-circle {
+      border-color: #673ab7;
+      background: radial-gradient(circle, #673ab7 40%, transparent 45%);
+    }
+    .gform-actions {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .gform-submit {
+      background: #673ab7;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Roboto', Arial, sans-serif;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: .5px;
+    }
+    .gform-clear {
+      color: #673ab7;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .gform-footer {
+      padding: 12px 24px;
+      font-size: 11px;
+      color: #5f6368;
+      background: #f8f9fa;
+      border-top: 1px solid #dadce0;
+    }
+
+    /* ── Pixel-art frame wrapper (B2) ── */
+    .iframe-frame {
+      padding: 18px;
+      background: var(--wood-mid);
+      border: 6px solid var(--wood-border);
+      box-shadow:
+        inset 4px 4px 0 var(--wood-hi),
+        inset -4px -4px 0 #0a0500,
+        0 0 30px var(--gold-glow);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .iframe-frame .frame-corner-top,
+    .iframe-frame .frame-corner-bot {
+      text-align: center;
+      color: var(--gold);
+      font-size: 8px;
+      letter-spacing: 3px;
+      margin: 4px 0 12px;
+      opacity: .8;
+      text-shadow: 2px 2px 0 #5a2800;
+    }
+    .iframe-frame .frame-corner-bot {
+      margin: 12px 0 4px;
+      font-size: 6px;
+      opacity: .5;
+    }
+  </style>
+</head>
+<body>
+  <div id="sky" data-stars="80"></div>
+
+  <nav class="nav">
+    <a href="../index.html">HOME</a>
+    <a href="story.html">OUR STORY</a>
+    <a href="details.html">DETAILS</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="rsvp.html" class="active" aria-current="page">RSVP</a>
+    <a href="registry.html">REGISTRY</a>
+  </nav>
+
+  <div class="content">
+    <div class="page-title">✦ RSVP — DESIGN PREVIEW ✦</div>
+
+    <div class="preview-intro">
+      <p>Four options. Custom HTML (<strong>A1</strong>, <strong>A2</strong>) vs. iframe embed (<strong>B1</strong>, <strong>B2</strong>).</p>
+      <p>For the custom forms, the <strong>visual</strong> and the <strong>backend</strong> are independent choices — either A1 or A2 can be wired to <strong>Formspree</strong> (~$10/mo at peak) or to a <strong>Google Form backend</strong> (free, slightly hacky).</p>
+      <p>The Google Form mocks below are static recreations — they don't actually submit. The real iframe would behave identically but go to Sheets.</p>
+    </div>
+
+    <!-- ──────────────────────────── -->
+    <!-- OPTION A1: COMPACT CUSTOM   -->
+    <!-- ──────────────────────────── -->
+    <div class="option-section">
+      <div class="option-header">
+        <span class="option-tag">A1</span>
+        <span class="option-name">COMPACT PIXEL-ART FORM</span>
+      </div>
+      <div class="option-meta">
+        <span class="label">AESTHETIC:</span> native pixel-art &nbsp;·&nbsp;
+        <span class="label">BACKEND:</span> Formspree or Google Forms &nbsp;·&nbsp;
+        <span class="label">EFFORT:</span> medium
+      </div>
+
+      <form class="rsvp-form-card" id="form-a1" onsubmit="return previewSubmit(event, 'a1')">
+        <div class="nail tl"></div><div class="nail tr"></div>
+        <div class="nail bl"></div><div class="nail br"></div>
+
+        <div class="card-header">✦ KINDLY REPLY ✦</div>
+
+        <div class="pixel-field">
+          <label class="pixel-label" for="a1-name">YOUR NAME <span class="req">*</span></label>
+          <input class="pixel-input" id="a1-name" name="name" type="text" placeholder="JANE & JOHN DOE" required>
+        </div>
+
+        <div class="pixel-field">
+          <label class="pixel-label" for="a1-email">EMAIL <span class="req">*</span></label>
+          <input class="pixel-input" id="a1-email" name="email" type="email" placeholder="YOU@EXAMPLE.COM" required>
+        </div>
+
+        <div class="pixel-field">
+          <label class="pixel-label">WILL YOU ATTEND? <span class="req">*</span></label>
+          <div class="yn-toggle" data-toggle="a1-attending">
+            <button type="button" class="yn-btn yes" data-val="yes">JOYFULLY<br>ATTENDING</button>
+            <button type="button" class="yn-btn no" data-val="no">REGRETFULLY<br>DECLINING</button>
+          </div>
+          <input type="hidden" name="attending" id="a1-attending">
+        </div>
+
+        <div class="pixel-field">
+          <label class="pixel-label" for="a1-party">PARTY SIZE (INCLUDING YOU)</label>
+          <select class="pixel-select" id="a1-party" name="party_size">
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6+</option>
+          </select>
+        </div>
+
+        <div class="pixel-field">
+          <label class="pixel-label" for="a1-diet">DIETARY NOTES</label>
+          <textarea class="pixel-textarea" id="a1-diet" name="dietary" placeholder="ALLERGIES, RESTRICTIONS, ETC."></textarea>
+        </div>
+
+        <div class="pixel-field">
+          <label class="pixel-label" for="a1-song">SONG REQUEST</label>
+          <input class="pixel-input" id="a1-song" name="song" type="text" placeholder="WHAT GETS YOU ON THE DANCE FLOOR?">
+        </div>
+
+        <div class="pixel-field">
+          <label class="pixel-label" for="a1-note">NOTE TO THE COUPLE</label>
+          <textarea class="pixel-textarea" id="a1-note" name="note" placeholder="SAY HI, LEAVE A WISH..."></textarea>
+        </div>
+
+        <div class="pixel-field">
+          <label class="pixel-label" for="a1-addr">MAILING ADDRESS</label>
+          <textarea class="pixel-textarea" id="a1-addr" name="address" placeholder="FOR THANK-YOU CARDS"></textarea>
+        </div>
+
+        <button class="pixel-submit" type="submit">SEND RSVP</button>
+      </form>
+    </div>
+
+    <!-- ──────────────────────────── -->
+    <!-- OPTION A2: SECTIONED CARDS  -->
+    <!-- ──────────────────────────── -->
+    <div class="option-section">
+      <div class="option-header">
+        <span class="option-tag">A2</span>
+        <span class="option-name">SECTIONED MULTI-CARD FORM</span>
+      </div>
+      <div class="option-meta">
+        <span class="label">AESTHETIC:</span> native pixel-art (questy) &nbsp;·&nbsp;
+        <span class="label">BACKEND:</span> Formspree or Google Forms &nbsp;·&nbsp;
+        <span class="label">EFFORT:</span> high
+      </div>
+
+      <form id="form-a2" onsubmit="return previewSubmit(event, 'a2')">
+
+        <div class="rsvp-form-card">
+          <div class="nail tl"></div><div class="nail tr"></div>
+          <div class="nail bl"></div><div class="nail br"></div>
+          <div class="card-header">✦ I · ATTENDANCE ✦</div>
+
+          <div class="pixel-field">
+            <label class="pixel-label" for="a2-name">YOUR NAME <span class="req">*</span></label>
+            <input class="pixel-input" id="a2-name" name="name" type="text" placeholder="JANE & JOHN DOE" required>
+          </div>
+          <div class="pixel-field">
+            <label class="pixel-label" for="a2-email">EMAIL <span class="req">*</span></label>
+            <input class="pixel-input" id="a2-email" name="email" type="email" placeholder="YOU@EXAMPLE.COM" required>
+          </div>
+          <div class="pixel-field">
+            <label class="pixel-label">WILL YOU ATTEND? <span class="req">*</span></label>
+            <div class="yn-toggle" data-toggle="a2-attending">
+              <button type="button" class="yn-btn yes" data-val="yes">JOYFULLY<br>ATTENDING</button>
+              <button type="button" class="yn-btn no" data-val="no">REGRETFULLY<br>DECLINING</button>
+            </div>
+            <input type="hidden" name="attending" id="a2-attending">
+          </div>
+          <div class="pixel-field">
+            <label class="pixel-label" for="a2-party">PARTY SIZE (INCLUDING YOU)</label>
+            <select class="pixel-select" id="a2-party" name="party_size">
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="rsvp-form-card">
+          <div class="nail tl"></div><div class="nail tr"></div>
+          <div class="nail bl"></div><div class="nail br"></div>
+          <div class="card-header">✦ II · THE DETAILS ✦</div>
+
+          <div class="pixel-field">
+            <label class="pixel-label" for="a2-diet">DIETARY NOTES</label>
+            <textarea class="pixel-textarea" id="a2-diet" name="dietary" placeholder="ALLERGIES, RESTRICTIONS, ETC."></textarea>
+          </div>
+          <div class="pixel-field">
+            <label class="pixel-label" for="a2-song">SONG REQUEST</label>
+            <input class="pixel-input" id="a2-song" name="song" type="text" placeholder="WHAT GETS YOU ON THE DANCE FLOOR?">
+          </div>
+          <div class="pixel-field">
+            <label class="pixel-label" for="a2-addr">MAILING ADDRESS</label>
+            <textarea class="pixel-textarea" id="a2-addr" name="address" placeholder="FOR THANK-YOU CARDS"></textarea>
+          </div>
+        </div>
+
+        <div class="rsvp-form-card">
+          <div class="nail tl"></div><div class="nail tr"></div>
+          <div class="nail bl"></div><div class="nail br"></div>
+          <div class="card-header">✦ III · A LETTER ✦</div>
+
+          <div class="pixel-field">
+            <label class="pixel-label" for="a2-note">NOTE TO THE COUPLE</label>
+            <textarea class="pixel-textarea" id="a2-note" name="note" placeholder="SAY HI, LEAVE A WISH..." style="min-height:140px"></textarea>
+          </div>
+        </div>
+
+        <button class="pixel-submit" type="submit">SEND RSVP</button>
+      </form>
+    </div>
+
+    <!-- ──────────────────────────── -->
+    <!-- OPTION B1: RAW IFRAME       -->
+    <!-- ──────────────────────────── -->
+    <div class="option-section">
+      <div class="option-header">
+        <span class="option-tag">B1</span>
+        <span class="option-name">RAW GOOGLE FORM EMBED</span>
+      </div>
+      <div class="option-meta">
+        <span class="label">AESTHETIC:</span> jarring (Google Forms default) &nbsp;·&nbsp;
+        <span class="label">BACKEND:</span> Google Sheets &nbsp;·&nbsp;
+        <span class="label">EFFORT:</span> low &nbsp;·&nbsp;
+        <span class="label">COST:</span> free
+      </div>
+      <p class="mock-note">This is a static visual mock of what a Google Form iframe looks like. The real embed would auto-load Google's CSS and behave the same.</p>
+
+      <div class="gform-mock">
+        <div class="gform-banner"></div>
+        <div class="gform-title-card">
+          <div class="gform-title">Sarah &amp; Alex's Wedding RSVP</div>
+          <div class="gform-desc">Please reply by February 6, 2027.</div>
+          <div class="gform-required-note">* Indicates required question</div>
+        </div>
+
+        <div class="gform-question">
+          <div class="gform-q-text">Your name <span class="star">*</span></div>
+          <input class="gform-input" type="text" placeholder="Your answer">
+        </div>
+
+        <div class="gform-question">
+          <div class="gform-q-text">Email <span class="star">*</span></div>
+          <input class="gform-input" type="email" placeholder="Your answer">
+        </div>
+
+        <div class="gform-question">
+          <div class="gform-q-text">Will you attend? <span class="star">*</span></div>
+          <div class="gform-radio-row selected">
+            <div class="gform-radio-circle"></div>
+            <span>Joyfully attending</span>
+          </div>
+          <div class="gform-radio-row">
+            <div class="gform-radio-circle"></div>
+            <span>Regretfully declining</span>
+          </div>
+        </div>
+
+        <div class="gform-question">
+          <div class="gform-q-text">Party size</div>
+          <input class="gform-input" type="text" placeholder="Your answer">
+        </div>
+
+        <div class="gform-question">
+          <div class="gform-q-text">Dietary notes</div>
+          <input class="gform-input" type="text" placeholder="Your answer">
+        </div>
+
+        <div class="gform-question">
+          <div class="gform-q-text">Song request</div>
+          <input class="gform-input" type="text" placeholder="Your answer">
+        </div>
+
+        <div class="gform-question">
+          <div class="gform-q-text">Note to the couple</div>
+          <input class="gform-input" type="text" placeholder="Your answer">
+        </div>
+
+        <div class="gform-actions">
+          <button class="gform-submit" type="button">Submit</button>
+          <span class="gform-clear">Clear form</span>
+        </div>
+
+        <div class="gform-footer">
+          Never submit passwords through Google Forms.<br>
+          This form was created inside of [your account]. Report abuse
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────── -->
+    <!-- OPTION B2: FRAMED IFRAME    -->
+    <!-- ──────────────────────────── -->
+    <div class="option-section">
+      <div class="option-header">
+        <span class="option-tag">B2</span>
+        <span class="option-name">FRAMED GOOGLE FORM EMBED</span>
+      </div>
+      <div class="option-meta">
+        <span class="label">AESTHETIC:</span> middle ground (pixel frame, plain insides) &nbsp;·&nbsp;
+        <span class="label">BACKEND:</span> Google Sheets &nbsp;·&nbsp;
+        <span class="label">EFFORT:</span> low-medium &nbsp;·&nbsp;
+        <span class="label">COST:</span> free
+      </div>
+      <p class="mock-note">Same iframe, but wrapped in a pixel-art frame like the YouTube embed on the Story page. The frame is ours; the inside is Google's.</p>
+
+      <div class="iframe-frame">
+        <div class="frame-corner-top">✦ RSVP ✦</div>
+
+        <div class="gform-mock">
+          <div class="gform-banner"></div>
+          <div class="gform-title-card">
+            <div class="gform-title">Sarah &amp; Alex's Wedding RSVP</div>
+            <div class="gform-desc">Please reply by February 6, 2027.</div>
+            <div class="gform-required-note">* Indicates required question</div>
+          </div>
+
+          <div class="gform-question">
+            <div class="gform-q-text">Your name <span class="star">*</span></div>
+            <input class="gform-input" type="text" placeholder="Your answer">
+          </div>
+
+          <div class="gform-question">
+            <div class="gform-q-text">Email <span class="star">*</span></div>
+            <input class="gform-input" type="email" placeholder="Your answer">
+          </div>
+
+          <div class="gform-question">
+            <div class="gform-q-text">Will you attend? <span class="star">*</span></div>
+            <div class="gform-radio-row selected">
+              <div class="gform-radio-circle"></div>
+              <span>Joyfully attending</span>
+            </div>
+            <div class="gform-radio-row">
+              <div class="gform-radio-circle"></div>
+              <span>Regretfully declining</span>
+            </div>
+          </div>
+
+          <div class="gform-question">
+            <div class="gform-q-text">Party size</div>
+            <input class="gform-input" type="text" placeholder="Your answer">
+          </div>
+
+          <div class="gform-question">
+            <div class="gform-q-text">Dietary notes</div>
+            <input class="gform-input" type="text" placeholder="Your answer">
+          </div>
+
+          <div class="gform-question">
+            <div class="gform-q-text">Song request</div>
+            <input class="gform-input" type="text" placeholder="Your answer">
+          </div>
+
+          <div class="gform-question">
+            <div class="gform-q-text">Note to the couple</div>
+            <input class="gform-input" type="text" placeholder="Your answer">
+          </div>
+
+          <div class="gform-actions">
+            <button class="gform-submit" type="button">Submit</button>
+            <span class="gform-clear">Clear form</span>
+          </div>
+        </div>
+
+        <div class="frame-corner-bot">~ powered by Google Forms ~</div>
+      </div>
+    </div>
+
+    <div class="option-section">
+      <div class="option-header">
+        <span class="option-name">THINKING NOTES</span>
+      </div>
+      <div class="preview-intro" style="margin-top: 20px;">
+        <p><strong>A1 vs A2:</strong> A1 is one scroll, faster for guests. A2 feels more crafted but doubles the perceived form length — older guests may lose patience.</p>
+        <p><strong>B1 vs B2:</strong> B2 mitigates the aesthetic break without solving it. The form itself is still Google. Some guests will trust it more <em>because</em> they recognize it.</p>
+        <p><strong>Hybrid worth considering:</strong> custom pixel-art form on rsvp.html, plus a "having trouble? RSVP by email" line for guests who can't deal with a web form. Belt and suspenders.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    SARAH &amp; ALEX · MARCH 6, 2027<br>♥
+  </footer>
+
+  <script src="../assets/js/stars.js"></script>
+  <script>
+    // Yes/No toggles
+    document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
+      var hiddenId = toggle.getAttribute('data-toggle');
+      var hidden = document.getElementById(hiddenId);
+      toggle.querySelectorAll('.yn-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          toggle.querySelectorAll('.yn-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          if (hidden) hidden.value = btn.getAttribute('data-val');
+        });
+      });
+    });
+
+    // Preview-only submit handler
+    function previewSubmit(e, id) {
+      e.preventDefault();
+      var form = document.getElementById('form-' + id);
+      var html = '<div class="rsvp-form-card success-state">' +
+                 '<div class="nail tl"></div><div class="nail tr"></div>' +
+                 '<div class="nail bl"></div><div class="nail br"></div>' +
+                 '<div class="check">♥</div>' +
+                 '<div class="msg">RSVP SENT</div>' +
+                 '<div class="sub">(preview only — nothing was actually submitted)<br>this is what guests would see after a real submit</div>' +
+                 '</div>';
+      form.outerHTML = html;
+      return false;
+    }
+  </script>
+</body>
+</html>
