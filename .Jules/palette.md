@@ -1,3 +1,3 @@
-## 2024-10-24 - Accessibility Fixes for Static Pages
-**Learning:** Found that custom visual styles often strip out native focus indicators, making keyboard navigation difficult. Also, decorative elements acting as links (like the lantern) need explicit ARIA labels to be meaningful to screen readers.
-**Action:** Always verify keyboard focus state (`:focus-visible`) when overriding default link styles, and always add `aria-label` to icon-only interactive elements. Use `aria-current` for navigation states.
+## 2024-06-01 - Dual-labeling icon-only links and iframe accessibility
+**Learning:** Icon-only elements (like the hidden "lantern" link) may have an `aria-label` for screen readers but lack a native tooltip for sighted mouse-users. Iframes embedding external content (like YouTube videos) must have a descriptive `title` attribute for screen reader context (WCAG 4.1.2).
+**Action:** When creating icon-only interactive elements, apply dual-labeling: use both `aria-label` and `title` attributes. Always add descriptive `title` attributes to `iframe` elements.
