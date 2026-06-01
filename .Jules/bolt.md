@@ -1,0 +1,3 @@
+## 2024-05-24 - DOM and Date Caching in Intervals
+**Learning:** High-frequency intervals (`setInterval` running every 1000ms) in this codebase often query the DOM redundantly and suffer from implicit type coercion overhead on Date objects when performing time math.
+**Action:** When implementing or refactoring interval-based visual updates (like countdowns), always cache DOM element references outside the interval callback. Additionally, cache `Date.getTime()` for static targets to avoid repeated coercion of Date objects inside the loop.
