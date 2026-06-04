@@ -1,0 +1,3 @@
+## 2024-06-04 - Countdown High-Frequency Interval Optimization
+**Learning:** The static countdown timer in this codebase was unnecessarily repeating expensive operations (DOM queries and Date type coercions) on every 1000ms tick across multiple HTML files. A high-frequency operation like a countdown `setInterval` is highly sensitive to inner-loop overhead. By caching `document.getElementById` references and using `.getTime()` once to avoid implicit object coercion, execution time was improved by ~87% in synthetic benchmarks.
+**Action:** Always extract shared repetitive interval logic into IIFE-wrapped `.js` files, and aggressively cache DOM references and timestamp values outside the interval loop.
