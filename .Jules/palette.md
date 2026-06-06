@@ -1,3 +1,5 @@
 ## 2024-10-24 - Accessibility Fixes for Static Pages
 **Learning:** Found that custom visual styles often strip out native focus indicators, making keyboard navigation difficult. Also, decorative elements acting as links (like the lantern) need explicit ARIA labels to be meaningful to screen readers.
-**Action:** Always verify keyboard focus state (`:focus-visible`) when overriding default link styles, and always add `aria-label` to icon-only interactive elements. Use `aria-current` for navigation states.
+**Action:** Always verify keyboard focus state (`:focus-visible`) when overriding default link styles, and always add `aria-label` to icon-only interactive elements. Use `aria-current` for navigation states.## 2024-10-24 - Dual-labeling and iframe titles
+**Learning:** Found that while icon-only interactive elements had `aria-label`s for screen readers, they lacked visual tooltips for sighted users. Also found that embedded YouTube iframes lacked descriptive `title` attributes, which are critical for screen reader users to understand the frame's content before interacting with it.
+**Action:** Implemented dual-labeling (both `aria-label` and `title`) on icon-only interactive elements to ensure both screen reader support and native tooltips for sighted users. Ensured `iframe` elements have descriptive `title` attributes for better context.
