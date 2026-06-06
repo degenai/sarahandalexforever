@@ -334,23 +334,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="assets/js/stars.js"></script>
+  <script src="assets/js/countdown.js"></script>
   <script>
-    // Countdown
-    var target = new Date('2027-03-06T17:00:00');
-    function tick() {
-      var diff   = Math.max(0, target - Date.now());
-      var d = Math.floor(diff / 86400000);
-      var h = Math.floor((diff % 86400000) / 3600000);
-      var m = Math.floor((diff % 3600000)  / 60000);
-      var s = Math.floor((diff % 60000)    / 1000);
-      document.getElementById('days').textContent  = String(d).padStart(3, '0');
-      document.getElementById('hours').textContent = String(h).padStart(2, '0');
-      document.getElementById('mins').textContent  = String(m).padStart(2, '0');
-      document.getElementById('secs').textContent  = String(s).padStart(2, '0');
-    }
-    tick();
-    setInterval(tick, 1000);
-
     // Entrance animations
     gsap.from('.sign-board', { opacity:0, y:90,  duration:1.1, ease:'back.out(1.4)', delay:.2  });
     gsap.from('.post-legs',  { opacity:0, y:40,  duration:.8,  ease:'power2.out',    delay:.7  });
