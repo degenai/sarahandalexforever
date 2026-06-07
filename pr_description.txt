@@ -1,0 +1,4 @@
+💡 What: Added `title` attributes to the lantern icons (desktop & mobile) and the YouTube embed iframe (our story).
+🎯 Why: The lantern icon is an icon-only interactive element. Adding a title creates a native tooltip for sighted users. Adding a title to the iframe provides important screen reader context about the embedded video ("The Proposal").
+📸 Before/After: No layout changes. Tooltips now appear on hover for the lantern icons.
+♿ Accessibility: Improves accessibility by providing necessary context for screen readers and native tooltips for interactive icons.
