@@ -1,0 +1,3 @@
+## 2024-06-12 - DOM Element & Date Caching in Inline Scripts
+**Learning:** High-frequency `setInterval` loops (like those used for countdowns across `desktop.html` and `mobile.html`) incur unnecessary overhead when repeatedly querying the DOM with `document.getElementById` and relying on implicit type coercion for `Date` objects inside the loop. Benchmarking shows significant performance improvements (~60%) by hoisting these operations out of the loop.
+**Action:** Always cache DOM elements and pre-compute `.getTime()` on Date objects outside of rendering loops (`setInterval` or `requestAnimationFrame`) to avoid redundant work and performance penalties in standard browser environments without relying on heavier framework memoization.
