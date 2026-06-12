@@ -1,0 +1,5 @@
+🚨 Severity: MEDIUM
+💡 Vulnerability: External scripts loaded via CDN (GSAP) lacked Subresource Integrity (SRI) attributes, making the application vulnerable to malicious script injection if the CDN were compromised.
+🎯 Impact: If the CDN were compromised and the GSAP library replaced with malicious code, attackers could execute arbitrary JavaScript within the context of our application (XSS), potentially stealing session tokens or manipulating the DOM.
+🔧 Fix: Added the `integrity` attribute containing the SHA-384 hash of the expected GSAP 3.12.5 file and `crossorigin="anonymous"` to the `<script>` tags in both `desktop.html` and `mobile.html`.
+✅ Verification: Tested via Playwright to ensure the GSAP scripts load successfully without integrity violations and confirmed the animations continue to work correctly on both desktop and mobile views.
