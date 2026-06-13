@@ -312,7 +312,8 @@
   <script src="assets/js/stars.js"></script>
   <script>
     // Countdown
-    var target = new Date('2027-03-06T17:00:00');
+    // ⚡ Bolt Optimization: Cache target.getTime() instead of creating Date object to avoid implicit coercion overhead in repeated calculations
+    var target = new Date('2027-03-06T17:00:00').getTime();
     function tick() {
       var diff   = Math.max(0, target - Date.now());
       var d = Math.floor(diff / 86400000);
