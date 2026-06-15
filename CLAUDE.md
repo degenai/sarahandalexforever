@@ -32,4 +32,4 @@ Design tokens and common styles live in `assets/css/shared.css`. Each page links
 
 ## Registry
 
-Cash-only. No store registries. Venmo/Cash App details TBD.
+Cash-only. No store registries. Venmo: @AAdamczyk, Cash App: $Alexczyk.
