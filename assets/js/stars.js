@@ -6,6 +6,9 @@
   var count = parseInt(sky.getAttribute('data-stars'), 10) || 150;
   var bigChance = 0.12;
 
+  // Performance: Batch DOM insertions using a DocumentFragment
+  var fragment = document.createDocumentFragment();
+
   for (var i = 0; i < count; i++) {
     var s = document.createElement('div');
     var big = Math.random() < bigChance;
@@ -17,6 +20,8 @@
       'height:' + (big ? 3 : 2) + 'px;' +
       '--d:'    + (Math.random() * 2.2 + 0.7).toFixed(1) + 's;' +
       '--dl:-'  + (Math.random() * 5).toFixed(1) + 's;';
-    sky.appendChild(s);
+    fragment.appendChild(s);
   }
+
+  sky.appendChild(fragment);
 })();
