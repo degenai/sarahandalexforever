@@ -1,0 +1,14 @@
+## REJECTED: SRI on CDN scripts — wrong threat model for this site
+
+Sarah and Alex Forever is a static wedding site with zero auth, zero user data, zero sessions.
+The threat model for Subresource Integrity (compromised CDN injects malicious JS) is
+not realistic for a wedding RSVP page.
+
+Risk of adding SRI: If GSAP pushes a patch, the hash breaks and the site silently loses
+animation/functionality. The benefit does not outweigh the maintenance risk.
+
+Additionally, a Sentinel PR (#114) proposed a hallucinated sha384 hash that would have
+broken GSAP entirely. The verification script it claimed to use (verify_sri.py) does not exist.
+
+Decision: All SRI PRs are auto-rejected. Do not propose SRI for this repo again.
+Also do not propose iframe sandbox — the work is merged (PR #116, 2026-06-15).
