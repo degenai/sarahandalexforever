@@ -1,3 +1,6 @@
 ## 2024-10-24 - Accessibility Fixes for Static Pages
 **Learning:** Found that custom visual styles often strip out native focus indicators, making keyboard navigation difficult. Also, decorative elements acting as links (like the lantern) need explicit ARIA labels to be meaningful to screen readers.
 **Action:** Always verify keyboard focus state (`:focus-visible`) when overriding default link styles, and always add `aria-label` to icon-only interactive elements. Use `aria-current` for navigation states.
+## 2024-10-25 - Custom Toggle and Form Accessibility
+**Learning:** Found that custom toggle buttons replacing native inputs (like Yes/No buttons replacing radio buttons) lack inherent state semantics for screen readers. Similarly, async form submissions that visually replace the form with a success message leave screen reader users completely unaware of the result.
+**Action:** Always add `aria-pressed="true/false"` and update it via JS for custom toggle buttons. Group them logically using `role="group"` and `aria-label`. For async form submissions, ensure success messages have `role="status"` with `aria-live="polite"` and error messages have `role="alert"` so feedback is announced automatically.
