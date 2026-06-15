@@ -14,8 +14,12 @@ document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
   var hidden = document.getElementById(toggle.getAttribute('data-toggle'));
   toggle.querySelectorAll('.yn-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      toggle.querySelectorAll('.yn-btn').forEach(function (b) { b.classList.remove('active'); });
+      toggle.querySelectorAll('.yn-btn').forEach(function (b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
       if (hidden) hidden.value = btn.getAttribute('data-val');
       animate(btn, {
         scale: [1, 1.12, 1],

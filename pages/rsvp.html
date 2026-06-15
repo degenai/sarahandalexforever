@@ -61,9 +61,9 @@
 
       <div class="pixel-field">
         <label class="pixel-label">WILL YOU ATTEND? <span class="req">*</span></label>
-        <div class="yn-toggle" data-toggle="rsvp-attending">
-          <button type="button" class="yn-btn yes" data-val="yes">JOYFULLY<br>ATTENDING</button>
-          <button type="button" class="yn-btn no" data-val="no">REGRETFULLY<br>DECLINING</button>
+        <div class="yn-toggle" data-toggle="rsvp-attending" role="group" aria-label="Attendance">
+          <button type="button" class="yn-btn yes" data-val="yes" aria-pressed="false">JOYFULLY<br>ATTENDING</button>
+          <button type="button" class="yn-btn no" data-val="no" aria-pressed="false">REGRETFULLY<br>DECLINING</button>
         </div>
         <input type="hidden" name="attending" id="rsvp-attending" required>
       </div>
@@ -101,12 +101,12 @@
 
       <button class="pixel-submit" type="submit" id="rsvp-submit">SEND RSVP</button>
 
-      <div id="rsvp-error" class="error-state" style="display:none">
+      <div id="rsvp-error" class="error-state" style="display:none" role="alert">
         <div class="msg">Something went wrong. Please try again, or email us directly.</div>
       </div>
     </form>
 
-    <div id="rsvp-success" class="form-card success-state" style="display:none">
+    <div id="rsvp-success" class="form-card success-state" style="display:none" role="status" aria-live="polite">
       <div class="nail tl"></div><div class="nail tr"></div>
       <div class="nail bl"></div><div class="nail br"></div>
       <div class="check">♥</div>
