@@ -378,11 +378,3 @@ a:focus-visible, button:focus-visible {
   line-height: 2;
 }
 
-/* ── Hidden private portal ── */
-.lantern {
-  position: fixed; bottom: 16px; right: 18px;
-  font-size: 20px; opacity: .07;
-  transition: opacity .4s;
-  text-decoration: none; z-index: 60;
-}
-.lantern:hover, .lantern:active, .lantern:focus-visible { opacity: .65; }

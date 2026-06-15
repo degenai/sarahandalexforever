@@ -1,0 +1,4 @@
+## 2024-05-15 - Exposure of Private/Admin Path via Hidden UI Element
+**Vulnerability:** A hidden icon (`.lantern`) acting as a link to a `private/` path was placed on the main pages (`desktop.html` and `mobile.html`), relying on security-through-obscurity to protect what appears to be an admin or private portal.
+**Learning:** Hardcoding paths to private or restricted portals directly in the public HTML, even if visually hidden, exposes them to discovery by anyone viewing the source code, using developer tools, or employing automated scanners. Security by obscurity is not effective against these methods.
+**Prevention:** Remove hidden links to restricted paths from public facing pages entirely. If a private area exists, it should be secured with proper access controls (e.g. authentication), and its URL should either not be linked from public pages or should only appear for authenticated users.
