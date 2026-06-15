@@ -385,4 +385,4 @@ a:focus-visible, button:focus-visible {
   transition: opacity .4s;
   text-decoration: none; z-index: 60;
 }
-.lantern:hover, .lantern:active { opacity: .65; }
+.lantern:hover, .lantern:active, .lantern:focus-visible { opacity: .65; }
