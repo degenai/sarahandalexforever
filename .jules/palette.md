@@ -15,7 +15,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 
 ## 2026-06-17 - Interactive Payment Handles
 **Learning:** Found that important actionable items like payment handles (Venmo, Cash App) were rendered as plain text. This creates friction for users wanting to contribute as they cannot click to navigate directly to the payment app.
-**Action:** When identifying actionable text or external handles, ensure they are implemented as interactive links with proper styling (`.cal-btn`) and accessibility attributes (`aria-label`, `target="_blank"`, `rel="noopener"`) to improve usability.
+**Action:** When identifying textual external handles, ensure they are implemented as interactive links with proper styling (`.cal-btn`) and accessibility attributes (`aria-label`, `target="_blank"`, `rel="noopener"`) to improve usability.
 
 ## 2026-06-19 - Conditional RSVP Fields
 **Learning:** When users regretfully decline, the form can still require irrelevant fields. Keep only relevant fields active and visible to reduce friction.
