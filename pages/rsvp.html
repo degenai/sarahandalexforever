@@ -50,22 +50,22 @@
       <div class="card-header">✦ KINDLY REPLY ✦</div>
 
       <div class="pixel-field">
-        <label class="pixel-label" for="rsvp-name">YOUR NAME <span class="req">*</span></label>
+        <label class="pixel-label" for="rsvp-name">YOUR NAME <span class="req" aria-hidden="true">*</span></label>
         <input class="pixel-input" id="rsvp-name" name="name" type="text" placeholder="JANE & JOHN DOE" required autocomplete="name">
       </div>
 
       <div class="pixel-field">
-        <label class="pixel-label" for="rsvp-email">EMAIL <span class="req">*</span></label>
+        <label class="pixel-label" for="rsvp-email">EMAIL <span class="req" aria-hidden="true">*</span></label>
         <input class="pixel-input" id="rsvp-email" name="email" type="email" placeholder="YOU@EXAMPLE.COM" required autocomplete="email">
       </div>
 
       <div class="pixel-field">
-        <label class="pixel-label">WILL YOU ATTEND? <span class="req">*</span></label>
-        <div class="yn-toggle" data-toggle="rsvp-attending" role="group" aria-label="Attendance">
+        <div class="pixel-label" id="attendance-label">WILL YOU ATTEND? <span class="req" aria-hidden="true">*</span></div>
+        <div class="yn-toggle" data-toggle="rsvp-attending" role="group" aria-labelledby="attendance-label">
           <button type="button" class="yn-btn yes" data-val="yes" aria-pressed="false">JOYFULLY<br>ATTENDING</button>
           <button type="button" class="yn-btn no" data-val="no" aria-pressed="false">REGRETFULLY<br>DECLINING</button>
         </div>
-        <input type="hidden" name="attending" id="rsvp-attending" required>
+        <input type="hidden" name="attending" id="rsvp-attending">
       </div>
 
       <div class="pixel-field">
