@@ -4,3 +4,7 @@
 
 ## EATEN — merged in PR #107 (2026-06-15)
 This optimization was applied to both desktop.html and mobile.html. Future Bolt countdown PRs for this repo are auto-rejected — the work is done. Do not re-propose countdown timer changes.
+
+## 2026-06-16 - Batch DOM Insertions
+**Learning:** Generating and appending elements (like stars) one by one in a loop causes individual DOM reflows/mutations which degrade performance.
+**Action:** Use a `DocumentFragment` to batch the insertions in memory before appending the fragment to the live DOM in a single operation, drastically reducing layout calculations.
