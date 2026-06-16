@@ -49,14 +49,15 @@
 
       <div class="card-header">✦ KINDLY REPLY ✦</div>
 
+      <!-- Security: Enforce reasonable maxlength on all text inputs to prevent payload DoS / memory issues -->
       <div class="pixel-field">
         <label class="pixel-label" for="rsvp-name">YOUR NAME <span class="req">*</span></label>
-        <input class="pixel-input" id="rsvp-name" name="name" type="text" placeholder="JANE & JOHN DOE" required autocomplete="name">
+        <input class="pixel-input" id="rsvp-name" name="name" type="text" placeholder="JANE & JOHN DOE" required autocomplete="name" maxlength="100">
       </div>
 
       <div class="pixel-field">
         <label class="pixel-label" for="rsvp-email">EMAIL <span class="req">*</span></label>
-        <input class="pixel-input" id="rsvp-email" name="email" type="email" placeholder="YOU@EXAMPLE.COM" required autocomplete="email">
+        <input class="pixel-input" id="rsvp-email" name="email" type="email" placeholder="YOU@EXAMPLE.COM" required autocomplete="email" maxlength="150">
       </div>
 
       <div class="pixel-field">
@@ -65,7 +66,7 @@
           <button type="button" class="yn-btn yes" data-val="yes" aria-pressed="false">JOYFULLY<br>ATTENDING</button>
           <button type="button" class="yn-btn no" data-val="no" aria-pressed="false">REGRETFULLY<br>DECLINING</button>
         </div>
-        <input type="hidden" name="attending" id="rsvp-attending" required>
+        <input type="hidden" name="attending" id="rsvp-attending" required maxlength="10">
       </div>
 
       <div class="pixel-field">
@@ -78,22 +79,22 @@
 
       <div class="pixel-field">
         <label class="pixel-label" for="rsvp-diet">DIETARY NOTES</label>
-        <textarea class="pixel-textarea" id="rsvp-diet" name="dietary" placeholder="ALLERGIES, RESTRICTIONS, ETC."></textarea>
+        <textarea class="pixel-textarea" id="rsvp-diet" name="dietary" placeholder="ALLERGIES, RESTRICTIONS, ETC." maxlength="500"></textarea>
       </div>
 
       <div class="pixel-field">
         <label class="pixel-label" for="rsvp-song">SONG REQUEST</label>
-        <input class="pixel-input" id="rsvp-song" name="song" type="text" placeholder="WHAT GETS YOU ON THE DANCE FLOOR?">
+        <input class="pixel-input" id="rsvp-song" name="song" type="text" placeholder="WHAT GETS YOU ON THE DANCE FLOOR?" maxlength="200">
       </div>
 
       <div class="pixel-field">
         <label class="pixel-label" for="rsvp-note">NOTE TO THE COUPLE</label>
-        <textarea class="pixel-textarea" id="rsvp-note" name="note" placeholder="SAY HI, LEAVE A WISH..."></textarea>
+        <textarea class="pixel-textarea" id="rsvp-note" name="note" placeholder="SAY HI, LEAVE A WISH..." maxlength="1000"></textarea>
       </div>
 
       <div class="pixel-field">
         <label class="pixel-label" for="rsvp-addr">MAILING ADDRESS</label>
-        <textarea class="pixel-textarea" id="rsvp-addr" name="address" placeholder="FOR THANK-YOU CARDS"></textarea>
+        <textarea class="pixel-textarea" id="rsvp-addr" name="address" placeholder="FOR THANK-YOU CARDS" maxlength="300"></textarea>
       </div>
 
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
