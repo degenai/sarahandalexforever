@@ -49,11 +49,17 @@ form.addEventListener('submit', function (e) {
   submit.disabled = true;
   submit.textContent = 'SENDING...';
 
+  // Security enhancement: Add timeout to prevent hanging connections
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function () { controller.abort(); }, 15000);
+
   fetch(form.action, {
     method: 'POST',
     body: new FormData(form),
-    headers: { 'Accept': 'application/json' }
+    headers: { 'Accept': 'application/json' },
+    signal: controller.signal
   }).then(function (res) {
+    clearTimeout(timeoutId);
     if (res.ok) {
       form.style.display = 'none';
       success.style.display = 'block';
@@ -67,10 +73,15 @@ form.addEventListener('submit', function (e) {
     } else {
       throw new Error('Submit failed');
     }
-  }).catch(function () {
+  }).catch(function (err) {
+    clearTimeout(timeoutId);
     submit.disabled = false;
     submit.textContent = 'SEND RSVP';
-    errorEl.querySelector('.msg').textContent = 'Something went wrong. Please try again, or email us directly.';
+    if (err.name === 'AbortError') {
+      errorEl.querySelector('.msg').textContent = 'The request timed out. Please try again later.';
+    } else {
+      errorEl.querySelector('.msg').textContent = 'Something went wrong. Please try again, or email us directly.';
+    }
     errorEl.style.display = 'block';
   });
 });
