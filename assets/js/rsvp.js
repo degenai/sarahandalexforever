@@ -20,7 +20,29 @@ document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
       });
       btn.classList.add('active');
       btn.setAttribute('aria-pressed', 'true');
-      if (hidden) hidden.value = btn.getAttribute('data-val');
+      var val = btn.getAttribute('data-val');
+      if (hidden) hidden.value = val;
+
+      var attendingFields = document.querySelectorAll('.attending-only');
+      if (val === 'no') {
+        attendingFields.forEach(function(field) {
+          field.style.opacity = '0.4';
+          field.style.transition = 'opacity 0.3s';
+          field.style.pointerEvents = 'none';
+          field.querySelectorAll('input, select, textarea').forEach(function(input) {
+            input.disabled = true;
+          });
+        });
+      } else {
+        attendingFields.forEach(function(field) {
+          field.style.opacity = '1';
+          field.style.pointerEvents = 'auto';
+          field.querySelectorAll('input, select, textarea').forEach(function(input) {
+            input.disabled = false;
+          });
+        });
+      }
+
       animate(btn, {
         scale: [1, 1.12, 1],
         duration: 340,
