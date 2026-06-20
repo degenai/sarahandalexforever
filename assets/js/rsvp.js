@@ -43,10 +43,23 @@ form.addEventListener('submit', function (e) {
   if (!document.getElementById('rsvp-attending').value) {
     errorEl.querySelector('.msg').textContent = 'Please choose Attending or Declining.';
     errorEl.style.display = 'block';
+
+    // UX/a11y: shake the toggle container and return focus to the first button
+    var toggleContainer = document.querySelector('.yn-toggle');
+    if (toggleContainer) {
+      animate(toggleContainer, {
+        translateX: [-5, 5, -5, 5, 0],
+        duration: 400,
+        easing: 'easeInOutQuad'
+      });
+      var firstBtn = toggleContainer.querySelector('.yn-btn');
+      if (firstBtn) firstBtn.focus();
+    }
     return;
   }
 
   submit.disabled = true;
+  submit.setAttribute('aria-busy', 'true');
   submit.textContent = 'SENDING...';
 
   // Security enhancement: Add timeout to prevent hanging connections
@@ -61,6 +74,7 @@ form.addEventListener('submit', function (e) {
   }).then(function (res) {
     clearTimeout(timeoutId);
     if (res.ok) {
+      submit.removeAttribute('aria-busy');
       form.style.display = 'none';
       success.style.display = 'block';
       animate('#rsvp-success', {
@@ -76,6 +90,7 @@ form.addEventListener('submit', function (e) {
   }).catch(function (err) {
     clearTimeout(timeoutId);
     submit.disabled = false;
+    submit.removeAttribute('aria-busy');
     submit.textContent = 'SEND RSVP';
     if (err.name === 'AbortError') {
       errorEl.querySelector('.msg').textContent = 'The request timed out. Please try again later.';
