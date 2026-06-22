@@ -4,3 +4,7 @@
 
 ## EATEN — merged in PR #107 (2026-06-15)
 This optimization was applied to both desktop.html and mobile.html. Future Bolt countdown PRs for this repo are auto-rejected — the work is done. Do not re-propose countdown timer changes.
+
+## 2024-06-22 - Viewport Metrics Optimization
+**Learning:** Calculating `window.innerHeight` and dependent metrics like `fadeStart`/`fadeEnd` inside a high-frequency loop (like a `requestAnimationFrame` triggered by scroll events) incurs unnecessary CPU overhead and potential layout recalculations, as these values only change on resize.
+**Action:** Extract viewport dimension reads (`window.innerHeight`) out of scroll loops and recalculate them only in a `resize` event handler to improve rendering performance.

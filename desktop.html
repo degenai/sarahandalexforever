@@ -368,12 +368,15 @@
     (function () {
       var grass = document.querySelector('.grass-strip');
       if (!grass) return;
+
       var ticking = false;
+      // ⚡ Bolt: Cache viewport metrics outside the high-frequency scroll loop
+      var vh = window.innerHeight;
+      var fadeStart = vh * 0.85;
+      var fadeEnd   = vh * 0.45;
+
       function update() {
         var rect = grass.getBoundingClientRect();
-        var vh = window.innerHeight;
-        var fadeStart = vh * 0.85;
-        var fadeEnd   = vh * 0.45;
         var b = rect.bottom;
         var opacity = b >= fadeStart ? 1
                     : b <= fadeEnd   ? 0
@@ -381,14 +384,23 @@
         grass.style.opacity = opacity.toFixed(3);
         ticking = false;
       }
-      function onScrollOrResize() {
+
+      function onScroll() {
         if (!ticking) {
           window.requestAnimationFrame(update);
           ticking = true;
         }
       }
-      window.addEventListener('scroll', onScrollOrResize, { passive: true });
-      window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+      function onResize() {
+        vh = window.innerHeight;
+        fadeStart = vh * 0.85;
+        fadeEnd   = vh * 0.45;
+        onScroll();
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize, { passive: true });
       update();
     })();
   </script>
