@@ -386,3 +386,30 @@ a:focus-visible, button:focus-visible {
   text-decoration: none; z-index: 60;
 }
 .lantern:hover, .lantern:active, .lantern:focus-visible { opacity: .65; }
+
+/* ── Skip Link ── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--wood-dark);
+  color: var(--gold);
+  padding: 12px 24px;
+  z-index: 9999;
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 2px;
+  transition: top 0.2s ease;
+  border: 3px solid var(--wood-border);
+  border-top: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,.6);
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+#main-content:focus {
+  outline: none;
+}
