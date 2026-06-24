@@ -4,3 +4,7 @@
 
 ## EATEN — merged in PR #107 (2026-06-15)
 This optimization was applied to both desktop.html and mobile.html. Future Bolt countdown PRs for this repo are auto-rejected — the work is done. Do not re-propose countdown timer changes.
+
+## 2024-06-24 - WebP Optimization
+**Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
+**Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
