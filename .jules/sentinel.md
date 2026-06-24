@@ -12,3 +12,8 @@ broken GSAP entirely. The verification script it claimed to use (verify_sri.py) 
 
 Decision: All SRI PRs are auto-rejected. Do not propose SRI for this repo again.
 Also do not propose iframe sandbox — the work is merged (PR #116, 2026-06-15).
+
+## 2024-06-24 - Privacy Enhancement: YouTube NoCookie
+**Vulnerability:** Embedded YouTube iframe uses standard domain, which tracks users with cookies upon page load.
+**Learning:** In a static site with no cookie banner, third-party embedded content can introduce unexpected tracking cookies, violating user privacy.
+**Prevention:** Always use the `youtube-nocookie.com` domain for embedded YouTube videos to prevent cookie tracking.
