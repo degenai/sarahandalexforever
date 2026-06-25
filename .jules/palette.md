@@ -32,3 +32,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 ## 2026-06-24 - Prefers Reduced Motion
 **Learning:** The site's infinite star twinkling animation and page entrance animations can affect users with vestibular disorders.
 **Action:** Add a global `@media (prefers-reduced-motion: reduce)` policy that forces animations and transitions to complete near-instantly for users who request reduced motion.
+
+## 2024-10-25 - Dual-Labeling Abbreviated Utility Links
+**Learning:** Found that abbreviated utility links (like "+ GOOGLE", "+ APPLE / .ICS", or "[ mobile view ]") do not provide sufficient context for screen readers and can be confusing.
+**Action:** Always implement dual-labeling for abbreviated utility links by adding a descriptive `title` (for visual tooltips) and `aria-label` (for screen readers) to clarify their function.
