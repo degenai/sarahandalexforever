@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2024-06-25 - Inline Critical Routing Script
+**Learning:** Found that using an external script (`redirect.js`) for the critical initial routing in `index.html` causes a blocking network request that delays the redirect to the actual application (`desktop.html` or `mobile.html`).
+**Action:** Inline the simple routing logic directly into `<script>` tags within `index.html` to eliminate the extra network round-trip and significantly improve the Time to First Byte (TTFB) and initial load speed.
