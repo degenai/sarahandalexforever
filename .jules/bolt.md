@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2026-06-26 - Hero Image Priority
+**Learning:** The browser's default heuristics may not always prioritize the most important above-the-fold image (LCP element) soon enough, leading to delayed Largest Contentful Paint.
+**Action:** Apply `fetchpriority="high"` to critical hero images to signal to the browser that these assets should be requested early and with high priority.
