@@ -40,6 +40,7 @@ html, body {
   position: fixed;
   background: #fdf8ee;
   animation: twinkle var(--d) ease-in-out infinite var(--dl);
+  pointer-events: none;
 }
 @keyframes twinkle {
   0%,100% { opacity: .12; transform: scale(1);   }
