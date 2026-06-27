@@ -32,3 +32,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 ## 2026-06-24 - Prefers Reduced Motion
 **Learning:** The site's infinite star twinkling animation and page entrance animations can affect users with vestibular disorders.
 **Action:** Add a global `@media (prefers-reduced-motion: reduce)` policy that forces animations and transitions to complete near-instantly for users who request reduced motion.
+
+## 2026-06-27 - Visual Feedback for Form Input Limits
+**Learning:** Hard limits via `maxlength` on textareas block further typing without any visual indication, which creates a jarring user experience. Users need immediate visual context for how close they are to the limit.
+**Action:** Add dynamic visual character counters to `textarea` fields with `maxlength` attributes to provide real-time feedback and prevent unexpected input truncation.
