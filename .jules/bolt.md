@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2026-06-29 - DOM Query Caching in Event Listeners
+**Learning:** Performing DOM queries like `querySelectorAll` inside event listeners (e.g., `click` handlers on form toggles) causes redundant traversals and CPU overhead on every interaction, especially for static elements that do not change.
+**Action:** Always cache references to static DOM elements outside of event listeners. This eliminates redundant queries and speeds up user interaction handling.

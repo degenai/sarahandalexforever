@@ -10,11 +10,15 @@ animate('#rsvp-form .pixel-field, #rsvp-form .pixel-submit', {
 });
 
 // Yes/No toggle with bounce on click
+// ⚡ Bolt: Cache static DOM queries outside event listeners to avoid redundant traversals
+var attendingFields = document.querySelectorAll('.attending-only');
+
 document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
   var hidden = document.getElementById(toggle.getAttribute('data-toggle'));
-  toggle.querySelectorAll('.yn-btn').forEach(function (btn) {
+  var btns = toggle.querySelectorAll('.yn-btn');
+  btns.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      toggle.querySelectorAll('.yn-btn').forEach(function (b) {
+      btns.forEach(function (b) {
         b.classList.remove('active');
         b.setAttribute('aria-pressed', 'false');
       });
@@ -23,7 +27,6 @@ document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
       var val = btn.getAttribute('data-val');
       if (hidden) hidden.value = val;
 
-      var attendingFields = document.querySelectorAll('.attending-only');
       if (val === 'no') {
         attendingFields.forEach(function(field) {
           field.style.opacity = '0.4';
