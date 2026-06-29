@@ -98,6 +98,12 @@ form.addEventListener('submit', function (e) {
     if (res.ok) {
       submit.removeAttribute('aria-busy');
       form.style.display = 'none';
+
+      var isDeclining = document.getElementById('rsvp-attending').value === 'no';
+      if (isDeclining) {
+        success.querySelector('.sub').innerHTML = 'Thank you for letting us know.<br>We will miss you!';
+      }
+
       success.style.display = 'block';
       animate('#rsvp-success', {
         scale: [0.85, 1],
