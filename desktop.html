@@ -379,6 +379,7 @@
       var vh = window.innerHeight;
       var fadeStart = vh * 0.85;
       var fadeEnd   = vh * 0.45;
+      var currentOpacity = null;
 
       function update() {
         var rect = grass.getBoundingClientRect();
@@ -386,7 +387,11 @@
         var opacity = b >= fadeStart ? 1
                     : b <= fadeEnd   ? 0
                     : (b - fadeEnd) / (fadeStart - fadeEnd);
-        grass.style.opacity = opacity.toFixed(3);
+        var newOpacity = opacity.toFixed(3);
+        if (newOpacity !== currentOpacity) {
+          grass.style.opacity = newOpacity;
+          currentOpacity = newOpacity;
+        }
         ticking = false;
       }
 
