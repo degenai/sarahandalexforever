@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2027-03-05 - Redundant DOM Write Optimization
+**Learning:** Continuously re-assigning the same value to `element.style.opacity` during high-frequency scroll loops triggers unnecessary internal browser style recalculations, even if the visual output doesn't change.
+**Action:** Cache the current property value in a variable and conditionally update the DOM only when the new calculated value differs from the cached value, reducing style recalcs.
