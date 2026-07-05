@@ -32,3 +32,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 ## 2026-06-24 - Prefers Reduced Motion
 **Learning:** The site's infinite star twinkling animation and page entrance animations can affect users with vestibular disorders.
 **Action:** Add a global `@media (prefers-reduced-motion: reduce)` policy that forces animations and transitions to complete near-instantly for users who request reduced motion.
+
+## 2024-10-26 - Inline Validation Feedback
+**Learning:** Found that relying solely on native HTML form validation leaves users without immediate feedback when tabbing through required fields. This can cause frustration upon submit.
+**Action:** Always implement `blur` event listeners on required form fields to toggle `aria-invalid="true"` dynamically, paired with clear visual error states to guide users before submission.

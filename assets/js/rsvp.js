@@ -122,3 +122,19 @@ form.addEventListener('submit', function (e) {
     errorEl.style.display = 'block';
   });
 });
+
+// Inline validation feedback on blur
+document.querySelectorAll('input[required], textarea[required]').forEach(function(input) {
+  input.addEventListener('blur', function() {
+    if (!input.value.trim()) {
+      input.setAttribute('aria-invalid', 'true');
+    } else {
+      input.removeAttribute('aria-invalid');
+    }
+  });
+  input.addEventListener('input', function() {
+    if (input.value.trim()) {
+      input.removeAttribute('aria-invalid');
+    }
+  });
+});
