@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2026-07-05 - YouTube Iframe Facade Optimization
+**Learning:** Embedding third-party video players (like YouTube iframes) directly in the HTML causes a significant performance hit on initial load because it downloads heavy JavaScript and blocks the main thread, even if `loading="lazy"` is used.
+**Action:** Implement a "facade" using the `srcdoc` attribute on the `iframe`. This renders a lightweight, static thumbnail and a play button initially. The actual heavy YouTube player is only loaded when the user interacts with the facade, drastically improving Time to Interactive (TTI) and reducing initial payload size.
