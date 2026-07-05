@@ -114,12 +114,14 @@
     <div class="video-section-title">✦ THE PROPOSAL ✦</div>
 
     <div class="video-wrap">
-<<<<<<< HEAD
-      <!-- Performance: lazy load below-the-fold YouTube embed to save initial bandwidth and CPU -->
-      <iframe src="https://www.youtube.com/embed/XrTrLTkO7Hg?start=70" allowfullscreen title="The Proposal" loading="lazy"></iframe>
-=======
-      <iframe src="https://www.youtube-nocookie.com/embed/XrTrLTkO7Hg?start=70" allowfullscreen title="The Proposal"></iframe>
->>>>>>> 3e8127c (🛡️ Sentinel: Use youtube-nocookie for embedded video)
+<!-- Performance: Use srcdoc facade to defer heavy YouTube JS execution until user interaction, while maintaining nocookie privacy -->
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/XrTrLTkO7Hg?start=70"
+        srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black;background:rgba(0,0,0,0.5);border-radius:50%;width:1.5em;line-height:1.5em;left:0;right:0}</style><a href='https://www.youtube-nocookie.com/embed/XrTrLTkO7Hg?start=70&amp;autoplay=1'><img src='https://img.youtube.com/vi/XrTrLTkO7Hg/hqdefault.jpg' alt='The Proposal'><span>▶</span></a>"
+        allowfullscreen
+        title="The Proposal"
+        loading="lazy">
+      </iframe>
     </div>
   </div>
 
