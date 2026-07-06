@@ -17,3 +17,8 @@ Also do not propose iframe sandbox — the work is merged (PR #116, 2026-06-15).
 **Vulnerability:** Embedded YouTube iframe uses standard domain, which tracks users with cookies upon page load.
 **Learning:** In a static site with no cookie banner, third-party embedded content can introduce unexpected tracking cookies, violating user privacy.
 **Prevention:** Always use the `youtube-nocookie.com` domain for embedded YouTube videos to prevent cookie tracking.
+
+## 2025-01-20 - Defense in Depth: Global Referrer Policy
+**Vulnerability:** External assets (fonts, scripts, iframes) and links without explicit `noreferrer` can leak the full URL of the site to third parties via the `Referer` header.
+**Learning:** While individual links may be protected, a global Referrer-Policy provides defense-in-depth for all outgoing requests (including embedded YouTube iframes and Formspree submissions) on a static site.
+**Prevention:** Implement a global `<meta name="referrer" content="strict-origin-when-cross-origin">` tag across all HTML pages to ensure consistent privacy and security.
