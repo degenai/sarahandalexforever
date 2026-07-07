@@ -2,24 +2,28 @@
   var sky = document.getElementById('sky');
   if (!sky) return;
 
-  // Default count, override with data-stars on the sky div
   var count = parseInt(sky.getAttribute('data-stars'), 10) || 150;
   var bigChance = 0.12;
 
-  // ⚡ Bolt: Use a DocumentFragment to batch DOM insertions and reduce reflows
+  // ⚡ Bolt: Use DocumentFragment and cloneNode to minimize DOM overhead
   var fragment = document.createDocumentFragment();
+  var tmpl = document.createElement('div');
+  tmpl.className = 'star';
 
   for (var i = 0; i < count; i++) {
-    var s = document.createElement('div');
+    // ⚡ Bolt: cloneNode is faster than createElement
+    var s = tmpl.cloneNode();
     var big = Math.random() < bigChance;
-    s.className = 'star';
-    s.style.cssText =
-      'left:'   + (Math.random() * 100).toFixed(1) + '%;' +
-      'top:'    + (Math.random() * 100).toFixed(1) + '%;' +
-      'width:'  + (big ? 3 : 2) + 'px;' +
-      'height:' + (big ? 3 : 2) + 'px;' +
-      '--d:'    + (Math.random() * 2.2 + 0.7).toFixed(1) + 's;' +
-      '--dl:-'  + (Math.random() * 5).toFixed(1) + 's;';
+    var size = big ? '3px' : '2px';
+
+    // ⚡ Bolt: Direct property assignment avoids CSS parser overhead from cssText
+    s.style.left = (Math.random() * 100).toFixed(1) + '%';
+    s.style.top = (Math.random() * 100).toFixed(1) + '%';
+    s.style.width = size;
+    s.style.height = size;
+    s.style.setProperty('--d', (Math.random() * 2.2 + 0.7).toFixed(1) + 's');
+    s.style.setProperty('--dl', '-' + (Math.random() * 5).toFixed(1) + 's');
+
     fragment.appendChild(s);
   }
 
