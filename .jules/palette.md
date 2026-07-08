@@ -32,3 +32,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 ## 2026-06-24 - Prefers Reduced Motion
 **Learning:** The site's infinite star twinkling animation and page entrance animations can affect users with vestibular disorders.
 **Action:** Add a global `@media (prefers-reduced-motion: reduce)` policy that forces animations and transitions to complete near-instantly for users who request reduced motion.
+
+## 2024-03-24 - Low-Opacity Contrast Failures
+**Learning:** Text elements specifically styled with low opacity for aesthetic reasons (e.g., `opacity: .25` for placeholders, `opacity: .3` for footers and placeholder boxes) consistently fail WCAG AA contrast ratio requirements against the dark `#07050f` and `#040210` backgrounds.
+**Action:** Always verify contrast ratios when using opacity to dim text. For this design system, text opacity should be no lower than `0.5` on dark wood/sky backgrounds to maintain a minimum 4.5:1 contrast ratio.
