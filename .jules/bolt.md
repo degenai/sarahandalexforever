@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2024-06-25 - Defer Non-Critical DOM Generation
+**Learning:** Generating hundreds of decorative DOM elements (like stars) synchronously blocks the main thread, delaying First Contentful Paint (FCP) and Time to Interactive (TTI).
+**Action:** Wrap non-critical background DOM generation in `window.requestIdleCallback` (with a `setTimeout` fallback) to defer execution until the browser's main thread is idle, ensuring critical rendering tasks complete first.
