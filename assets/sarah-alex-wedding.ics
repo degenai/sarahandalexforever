@@ -9,8 +9,9 @@ DTSTAMP:20260525T000000Z
 DTSTART:20270306T220000Z
 DTEND:20270307T040000Z
 SUMMARY:Sarah & Alex's Wedding
-DESCRIPTION:Join us as Sarah & Alex tie the knot! Ceremony at 5 PM\, reception to follow. More details at sarahandalexforever.
+DESCRIPTION:Join us as Sarah & Alex tie the knot! Ceremony at 5 PM\, reception to follow. More details at sarahandalexforever.com
 LOCATION:Butterfly Pavilion
+URL:https://sarahandalexforever.com
 STATUS:CONFIRMED
 TRANSP:OPAQUE
 END:VEVENT
