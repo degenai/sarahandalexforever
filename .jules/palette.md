@@ -32,3 +32,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 ## 2026-06-24 - Prefers Reduced Motion
 **Learning:** The site's infinite star twinkling animation and page entrance animations can affect users with vestibular disorders.
 **Action:** Add a global `@media (prefers-reduced-motion: reduce)` policy that forces animations and transitions to complete near-instantly for users who request reduced motion.
+
+## 2024-10-25 - Context-Aware Success Messaging
+**Learning:** A static, one-size-fits-all success message on forms with branching logic (like an RSVP form) creates a disjointed UX. Telling someone "We can't wait to see you" after they just selected "Regretfully Declining" feels automated and careless.
+**Action:** Always implement context-aware success states that dynamically reflect the user's input for a more personalized and empathetic experience.
