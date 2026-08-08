@@ -37,7 +37,7 @@ html, body {
 
 /* ── Stars ── */
 .star {
-  position: fixed;
+  position: absolute;
   background: #fdf8ee;
   animation: twinkle var(--d) ease-in-out infinite var(--dl);
 }

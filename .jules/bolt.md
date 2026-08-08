@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2024-07-06 - Compositor Layer Explosion from Fixed Elements
+**Learning:** Applying `position: fixed` to a large number of elements (like 150 background stars) causes severe performance degradation, especially on mobile, because browsers often promote each fixed element to its own compositor layer to keep it stable during scrolling.
+**Action:** When creating many elements that need to stay fixed relative to the viewport, wrap them in a single `position: fixed` container (like `#sky`) and give the children `position: absolute`. They will inherit the fixed behavior without triggering layer explosion.
