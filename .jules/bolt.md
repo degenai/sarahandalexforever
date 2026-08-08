@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2024-06-25 - Explicit Image Dimensions and Async Decoding
+**Learning:** Missing explicit `width` and `height` attributes on `<img>` tags cause Cumulative Layout Shift (CLS) as the browser does not know the aspect ratio before downloading the image. Furthermore, decoding large images blocks the main thread.
+**Action:** Always include explicit `width` and `height` attributes to reserve space and prevent CLS. Add `decoding="async"` to allow the browser to decode images off the main thread, improving UI responsiveness.
