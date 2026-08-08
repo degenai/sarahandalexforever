@@ -122,3 +122,32 @@ form.addEventListener('submit', function (e) {
     errorEl.style.display = 'block';
   });
 });
+
+// UX: Add visual character counter for max-length textareas to provide user feedback
+// Ensure this runs only once and reliably attaches to textareas
+function initCounters() {
+  document.querySelectorAll('textarea[maxlength]').forEach(function(field) {
+    if (field.nextElementSibling && field.nextElementSibling.classList.contains('char-counter')) return;
+    var max = field.getAttribute('maxlength');
+    var counter = document.createElement('div');
+    counter.className = 'char-counter';
+    counter.style.fontSize = '6px';
+    counter.style.opacity = '0.4';
+    counter.style.textAlign = 'right';
+    counter.style.marginTop = '6px';
+    counter.style.letterSpacing = '1px';
+    counter.setAttribute('aria-hidden', 'true');
+    counter.textContent = (field.value ? field.value.length : 0) + ' / ' + max;
+    field.parentNode.insertBefore(counter, field.nextSibling);
+    field.addEventListener('input', function() {
+      counter.textContent = field.value.length + ' / ' + max;
+    });
+  });
+}
+
+// RSVP.js is loaded as a module. This means DOMContentLoaded might have already fired.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCounters);
+} else {
+  initCounters();
+}
