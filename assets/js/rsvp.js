@@ -99,6 +99,7 @@ form.addEventListener('submit', function (e) {
       submit.removeAttribute('aria-busy');
       form.style.display = 'none';
       success.style.display = 'block';
+      success.focus();
       animate('#rsvp-success', {
         scale: [0.85, 1],
         opacity: [0, 1],
@@ -114,6 +115,7 @@ form.addEventListener('submit', function (e) {
     submit.disabled = false;
     submit.removeAttribute('aria-busy');
     submit.textContent = 'SEND RSVP';
+    submit.focus();
     if (err.name === 'AbortError') {
       errorEl.querySelector('.msg').textContent = 'The request timed out. Please try again later.';
     } else {

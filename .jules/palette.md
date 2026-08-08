@@ -32,3 +32,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 ## 2026-06-24 - Prefers Reduced Motion
 **Learning:** The site's infinite star twinkling animation and page entrance animations can affect users with vestibular disorders.
 **Action:** Add a global `@media (prefers-reduced-motion: reduce)` policy that forces animations and transitions to complete near-instantly for users who request reduced motion.
+
+## 2024-10-26 - Focus Management on Async Form Submit
+**Learning:** When a form submission relies on an asynchronous `fetch` request, the button is often disabled during the request. If the UI then completely swaps out the form for a success state without managing focus, keyboard users and screen readers are stranded with their focus on a now-disabled or hidden element (like the submit button). Similarly, if it fails, the user needs focus to return to the button to try again.
+**Action:** When swapping UI states post-submit, explicitly programmatically set focus. Set focus to the new success container (which needs `tabindex="-1"`) on success, and restore focus to the submit button (after re-enabling it) on error.
