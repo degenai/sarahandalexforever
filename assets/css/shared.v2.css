@@ -63,6 +63,15 @@ html, body {
   letter-spacing: 3px;
   opacity: .6;
   transition: opacity .3s, color .3s;
+  position: relative;
+}
+.nav a::after {
+  content: '';
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  bottom: -16px;
+  left: -16px;
 }
 .nav a:hover, .nav a:active, .nav a.active {
   opacity: 1;

@@ -32,3 +32,7 @@ A11y tooltips, title attributes, and focus-visible styles applied to lantern ico
 ## 2026-06-24 - Prefers Reduced Motion
 **Learning:** The site's infinite star twinkling animation and page entrance animations can affect users with vestibular disorders.
 **Action:** Add a global `@media (prefers-reduced-motion: reduce)` policy that forces animations and transitions to complete near-instantly for users who request reduced motion.
+
+## 2024-10-26 - Increased Tap Targets for Mobile Navigation
+**Learning:** Found that navigation links, while visually spaced nicely with flex gaps, had physical tap targets limited to their text height (~14px). This makes them difficult to tap accurately on mobile devices, failing WCAG target size standards.
+**Action:** Always increase the functional tap target of standalone text links by applying an invisible `::after` pseudo-element to ensure a minimum 44x44px hit area without disrupting the visual flex layout.
