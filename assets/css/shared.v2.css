@@ -98,7 +98,7 @@ a:focus-visible, button:focus-visible {
   display: flex; align-items: center; justify-content: center;
 }
 .placeholder-box span {
-  font-size: 7px; opacity: .3; letter-spacing: 2px;
+  font-size: 7px; opacity: .5; letter-spacing: 2px;
   text-align: center; line-height: 2;
 }
 .placeholder-box img {
@@ -153,7 +153,7 @@ a:focus-visible, button:focus-visible {
   );
   max-width: 300px;
   margin: 0 auto;
-  opacity: .4;
+  opacity: .5;
 }
 
 /* ── Wood plank divider ── */
@@ -181,7 +181,7 @@ a:focus-visible, button:focus-visible {
   text-align: center;
   padding: 60px 20px;
   font-size: 6px;
-  opacity: .3;
+  opacity: .5;
   letter-spacing: 2px;
   line-height: 2.5;
 }
@@ -268,7 +268,7 @@ a:focus-visible, button:focus-visible {
 .pixel-input::placeholder,
 .pixel-textarea::placeholder {
   color: var(--parchment);
-  opacity: .25;
+  opacity: .5;
 }
 
 .yn-toggle {
