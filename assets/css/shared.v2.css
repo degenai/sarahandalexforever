@@ -423,3 +423,13 @@ a:focus-visible, button:focus-visible {
 #main-content:focus {
   outline: none;
 }
+
+/* ── Inline validation feedback ── */
+.pixel-input[aria-invalid="true"],
+.pixel-textarea[aria-invalid="true"] {
+  border-color: var(--heart);
+  box-shadow:
+    inset  2px  2px 0 #000,
+    inset -2px -2px 0 #1a1a20,
+    0 0 12px rgba(220,38,38,.45);
+}
