@@ -16,3 +16,7 @@ This optimization was applied to both desktop.html and mobile.html. Future Bolt 
 ## 2024-06-24 - WebP Optimization
 **Learning:** Found that unoptimized PNG image assets (`stardew-portrait.png`, `venue-placeholder.png`) contributed significantly to the payload size.
 **Action:** Always convert large `.png` and `.jpg` image assets to `.webp` format and update the `<img src="..">` tags appropriately to improve page load times and bandwidth consumption.
+
+## 2024-06-25 - Particle Hit-Testing Overhead
+**Learning:** Having hundreds of animating, layered DOM elements (like the `.star` particles) forces the browser to continually perform hit-testing against them during scroll and mouse movements. This causes unnecessary Main Thread CPU overhead and potential jank, especially on lower-end devices.
+**Action:** Always add `pointer-events: none;` to purely decorative background particles or elements that do not require user interaction to eliminate hit-testing overhead.
