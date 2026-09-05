@@ -117,7 +117,7 @@ form.addEventListener('submit', function (e) {
     if (err.name === 'AbortError') {
       errorEl.querySelector('.msg').textContent = 'The request timed out. Please try again later.';
     } else {
-      errorEl.querySelector('.msg').textContent = 'Something went wrong. Please try again, or email us directly.';
+      errorEl.querySelector('.msg').textContent = 'Something went wrong. Please try again, or email hello@sarahandalexforever.com.';
     }
     errorEl.style.display = 'block';
   });

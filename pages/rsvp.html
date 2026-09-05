@@ -59,7 +59,7 @@
 
     <div class="rsvp-intro">
       We can't wait to celebrate with you.<br>
-      Please reply below.
+      Please reply by February 6, 2027.
     </div>
 
     <form id="rsvp-form" class="form-card"
@@ -99,6 +99,11 @@
       </div>
 
       <div class="pixel-field attending-only">
+        <label class="pixel-label" for="rsvp-guests">WHO'S COMING?</label>
+        <textarea class="pixel-textarea" id="rsvp-guests" name="guest_names" placeholder="EVERYONE IN YOUR PARTY, KIDS INCLUDED" maxlength="300"></textarea>
+      </div>
+
+      <div class="pixel-field attending-only">
         <label class="pixel-label" for="rsvp-diet">DIETARY NOTES</label>
         <textarea class="pixel-textarea" id="rsvp-diet" name="dietary" placeholder="ALLERGIES, RESTRICTIONS, ETC." maxlength="500"></textarea>
       </div>
@@ -124,7 +129,7 @@
       <button class="pixel-submit" type="submit" id="rsvp-submit">SEND RSVP</button>
 
       <div id="rsvp-error" class="error-state" style="display:none" role="alert">
-        <div class="msg">Something went wrong. Please try again, or email us directly.</div>
+        <div class="msg">Something went wrong. Please try again, or email hello@sarahandalexforever.com.</div>
       </div>
     </form>
 
