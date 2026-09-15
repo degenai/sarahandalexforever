@@ -13,8 +13,8 @@ jobs:
   parse-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
 
@@ -38,14 +38,14 @@ jobs:
         run: |
           files=$(git ls-files '*.css' | grep -vE '\.min\.css$|/vendor/|_deprecated/' || true)
           if [ -z "$files" ]; then echo "no css"; exit 0; fi
-          npx --yes stylelint $files
+          npx --yes stylelint@17.15.0 $files
 
       # 4) HTML must be structurally sound: closed tags, no duplicate ids/attrs.
       - name: HTML structure (html-validate)
         run: |
           files=$(git ls-files '*.html' | grep -vE '/vendor/|_deprecated/' || true)
           if [ -z "$files" ]; then echo "no html"; exit 0; fi
-          npx --yes html-validate $files
+          npx --yes html-validate@11.15.0 $files
 
       # 5) Every SRI integrity= hash must match the bytes the CDN serves.
       #    This is the check that would have caught PR #114's hallucinated GSAP hash

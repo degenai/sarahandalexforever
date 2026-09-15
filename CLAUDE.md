@@ -22,7 +22,7 @@ Design tokens and common styles live in `assets/css/shared.css`. Each page links
 
 ## Countdown target
 
-`new Date('2027-03-06T17:00:00')` — local time, intentionally no timezone. Defined in both `desktop.html` and `mobile.html`.
+`new Date('2027-03-06T17:00:00-05:00')` — 5 PM Eastern, pinned to UTC-5 (March 6, 2027 is before DST starts) so every guest counts to the same instant. Defined in both `desktop.html` and `mobile.html`.
 
 ## Linking
 

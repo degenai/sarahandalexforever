@@ -1,0 +1,12 @@
+# GitHub Pages runs Jekyll. Keep repo housekeeping out of the published site.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - LICENSE
+  - scripts
+  - .jules
+  - .claude
+  - .htmlvalidate.json
+  - .stylelintrc.json
+  - .gitattributes
+  - _claude-notes

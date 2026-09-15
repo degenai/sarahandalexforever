@@ -325,14 +325,15 @@
 
   </div>
 
-  <a class="lantern" href="private/" aria-label="Private access" title="Private access">&#x1F3EE;</a>
+  <a class="lantern" href="private/" aria-hidden="true" tabindex="-1">&#x1F3EE;</a>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
   <script src="assets/js/stars.js"></script>
   <script>
     // Countdown
     // Cache target timestamp to avoid implicit Date coercion overhead
-    var targetTime = new Date('2027-03-06T17:00:00').getTime();
+    // 5 PM Eastern on March 6, 2027 (still standard time, UTC-5). Pinned so a guest in Denver counts to the same instant.
+    var targetTime = new Date('2027-03-06T17:00:00-05:00').getTime();
     function tick() {
       var diff   = Math.max(0, targetTime - Date.now());
       var d = Math.floor(diff / 86400000);
