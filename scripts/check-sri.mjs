@@ -13,7 +13,8 @@ import { readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 
-const files = execSync("git ls-files '*.html'", { encoding: 'utf8' })
+// Double quotes: cmd.exe (Windows node) passes single quotes literally and matches nothing.
+const files = execSync('git ls-files "*.html"', { encoding: 'utf8' })
   .split('\n').map(s => s.trim()).filter(Boolean);
 
 const tagRe = /<(?:script|link)\b[^>]*\bintegrity\s*=\s*["'][^"']+["'][^>]*>/gi;
@@ -63,4 +64,4 @@ for (const file of files) {
 }
 
 console.log(`\nSRI: ${checked} checked, ${failed} bad`);
-process.exit(failed ? 1 : 0);
+process.exitCode = failed ? 1 : 0; // not process.exit(): Node 25 on Windows asserts if fetch handles are still closing
