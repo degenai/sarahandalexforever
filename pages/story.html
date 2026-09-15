@@ -23,6 +23,8 @@
   <!-- ⚡ Bolt Performance Optimization: Preconnect to fonts.gstatic.com to eliminate network waterfall and improve FCP -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.youtube-nocookie.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/shared.v2.css">
   <style>
@@ -140,7 +142,7 @@
 </head>
 <body>
   <a href="#main-content" class="skip-link">SKIP TO CONTENT</a>
-  <div id="sky"></div>
+  <div id="sky" data-stars="60"></div>
 
   <nav class="nav">
     <a href="../index.html">HOME</a>
@@ -157,7 +159,7 @@
     <h1 class="page-title">✦ OUR STORY ✦</h1>
 
     <div class="portrait-frame">
-      <img src="../assets/img/couple-fountain.webp" alt="Sarah and Alex sitting together on the edge of a fountain at golden hour" width="1800" height="1200" fetchpriority="high">
+      <img src="../assets/img/couple-fountain.webp" srcset="../assets/img/couple-fountain-800.webp 800w, ../assets/img/couple-fountain.webp 1800w" sizes="(max-width: 760px) calc(100vw - 72px), 688px" alt="Sarah and Alex sitting together on the edge of a fountain at golden hour" width="1800" height="1200" fetchpriority="high">
     </div>
 
     <div class="story-text">
@@ -199,9 +201,9 @@
     <div class="video-section-title">✦ THE PROPOSAL ✦</div>
 
     <div class="photo-strip">
-      <figure><img src="../assets/img/she-said-yes.webp" alt="Sarah holding up her ring hand next to Alex, both grinning, in front of the Dungeness Ruins" loading="lazy" width="1050" height="1400"></figure>
-      <figure><img src="../assets/img/dungeness-ruins.webp" alt="The Dungeness Ruins on Cumberland Island under palms and a blue sky" loading="lazy" width="1600" height="1200"></figure>
-      <figure><img src="../assets/img/cumberland-ferry.webp" alt="Sarah and Alex on the water with the Cumberland Island shoreline behind them" loading="lazy" width="1600" height="1200"></figure>
+      <figure><img src="../assets/img/she-said-yes-800.webp" alt="Sarah holding up her ring hand next to Alex, both grinning, in front of the Dungeness Ruins" loading="lazy" width="600" height="800"></figure>
+      <figure><img src="../assets/img/dungeness-ruins-800.webp" alt="The Dungeness Ruins on Cumberland Island under palms and a blue sky" loading="lazy" width="800" height="600"></figure>
+      <figure><img src="../assets/img/cumberland-ferry-800.webp" alt="Sarah and Alex on the water with the Cumberland Island shoreline behind them" loading="lazy" width="800" height="600"></figure>
       <figcaption class="photo-caption">Cumberland Island, September 2025. She said yes.</figcaption>
     </div>
 
