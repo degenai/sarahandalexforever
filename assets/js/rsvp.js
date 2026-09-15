@@ -1,4 +1,4 @@
-import { animate, stagger, createSpring } from 'https://cdn.jsdelivr.net/npm/animejs@4/+esm';
+import { animate, stagger, createSpring } from 'https://cdn.jsdelivr.net/npm/animejs@4.5.0/+esm';
 
 // Respect OS reduced-motion: every tween below goes through anim(), which becomes a no-op
 var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
