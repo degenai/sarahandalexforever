@@ -119,6 +119,7 @@
       overflow: hidden;
     }
     .story-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .story-photo.strip { aspect-ratio: auto; max-width: 220px; }
     .photo-caption {
       grid-column: 1 / -1;
       font-family: 'Lora', Georgia, serif;
@@ -174,6 +175,11 @@
       <p class="photo-caption">One of the first hikes, winter 2020.</p>
 
       <p>From those early pandemic evenings, they built a life full of laughter, inside jokes, and the kind of easy, comfortable love that makes everything feel a little lighter.</p>
+
+      <figure class="story-photo strip">
+        <img src="../assets/img/photo-booth-2023.webp" alt="A four-frame photo booth strip of Sarah and Alex mugging in front of green-screen explosions, a sports car and a cockpit" loading="lazy" width="700" height="2197">
+      </figure>
+      <p class="photo-caption">Photo booth, October 2023. No notes.</p>
 
       <figure class="story-photo">
         <img src="../assets/img/yurt-blue-ridge-2023.webp" alt="Sarah in a blue beanie laughing beside Alex in a ball cap, bare trees and blue sky behind them" loading="lazy" width="1000" height="1250">
