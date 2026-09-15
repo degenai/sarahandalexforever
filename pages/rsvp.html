@@ -72,7 +72,7 @@
       <div class="nail tl"></div><div class="nail tr"></div>
       <div class="nail bl"></div><div class="nail br"></div>
 
-      <div class="card-header">✦ KINDLY REPLY ✦</div>
+      <h2 class="card-header">✦ KINDLY REPLY ✦</h2>
 
       <!-- Security: Enforce reasonable maxlength on all text inputs to prevent payload DoS / memory issues -->
       <div class="pixel-field">
@@ -87,7 +87,7 @@
 
       <div class="pixel-field">
         <div class="pixel-label" id="attendance-label">WILL YOU ATTEND? <span class="req" aria-hidden="true">*</span></div>
-        <div class="yn-toggle" data-toggle="rsvp-attending" role="group" aria-labelledby="attendance-label">
+        <div class="yn-toggle" data-toggle="rsvp-attending" role="group" aria-labelledby="attendance-label" aria-required="true" aria-describedby="rsvp-error">
           <button type="button" class="yn-btn yes" data-val="yes" aria-pressed="false">JOYFULLY<br>ATTENDING</button>
           <button type="button" class="yn-btn no" data-val="no" aria-pressed="false">REGRETFULLY<br>DECLINING</button>
         </div>
@@ -95,7 +95,7 @@
       </div>
 
       <div class="pixel-field attending-only">
-        <label class="pixel-label" for="rsvp-party">PARTY SIZE (INCLUDING YOU)</label>
+        <label class="pixel-label" for="rsvp-party">PARTY SIZE (INCLUDING YOU) <span class="req" aria-hidden="true">*</span></label>
         <select class="pixel-select" id="rsvp-party" name="party_size">
           <option value="" selected>CHOOSE</option>
           <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
@@ -104,7 +104,7 @@
       </div>
 
       <div class="pixel-field attending-only">
-        <label class="pixel-label" for="rsvp-guests">WHO'S COMING?</label>
+        <label class="pixel-label" for="rsvp-guests">WHO'S COMING? <span class="req" aria-hidden="true">*</span></label>
         <textarea class="pixel-textarea" id="rsvp-guests" name="guest_names" placeholder="EVERYONE IN YOUR PARTY, KIDS INCLUDED" maxlength="300"></textarea>
       </div>
 
@@ -132,11 +132,12 @@
       <input type="hidden" name="_subject" id="rsvp-subject" value="New RSVP from sarahandalexforever">
       <input type="hidden" name="submission_id" id="rsvp-sid" value="">
 
-      <button class="pixel-submit" type="submit" id="rsvp-submit">SEND RSVP</button>
-
       <div id="rsvp-error" class="error-state" style="display:none" role="alert">
         <div class="msg">Something went wrong. Please try again, or email hello@sarahandalexforever.com.</div>
       </div>
+
+      <button class="pixel-submit" type="submit" id="rsvp-submit">SEND RSVP</button>
+
     </form>
 
     <div id="rsvp-success" class="form-card success-state" style="display:none" role="status" aria-live="polite" tabindex="-1">

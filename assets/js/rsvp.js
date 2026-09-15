@@ -61,6 +61,7 @@ document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
       var val = btn.getAttribute('data-val');
       if (hidden) hidden.value = val;
       setAttending(val);
+      errorEl.style.display = 'none';
       anim(btn, { scale: [1, 1.12, 1], duration: 340, ease: 'outQuad' });
     });
   });
@@ -116,8 +117,10 @@ form.addEventListener('submit', function (e) {
 
   var attending = attendEl ? attendEl.value : '';
   if (!attending) {
-    errorEl.querySelector('.msg').textContent = 'Please choose Attending or Declining.';
+    // Show the box first so the alert is in the accessibility tree when its text lands
     errorEl.style.display = 'block';
+    errorEl.querySelector('.msg').textContent = 'Please choose Attending or Declining.';
+    errorEl.scrollIntoView({ block: 'nearest', behavior: motionOK ? 'smooth' : 'auto' });
 
     // UX/a11y: shake the toggle container and return focus to the first button
     var toggleContainer = document.querySelector('.yn-toggle');
@@ -127,8 +130,6 @@ form.addEventListener('submit', function (e) {
         duration: 400,
         ease: 'inOutQuad'
       });
-      var firstBtn = toggleContainer.querySelector('.yn-btn');
-      if (firstBtn) firstBtn.focus();
     }
     return;
   }
@@ -163,7 +164,7 @@ form.addEventListener('submit', function (e) {
         ease: createSpring ? createSpring({ mass: 1, stiffness: 110, damping: 13 }) : 'outQuad',
         duration: 700
       });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: motionOK ? 'smooth' : 'auto' });
       try { localStorage.setItem('rsvp-sent', attending + ':' + Date.now()); } catch (_) {}
     } else {
       // Surface Formspree's own reason (422 validation, plan limits) instead of a generic line
@@ -182,6 +183,7 @@ form.addEventListener('submit', function (e) {
     submit.disabled = false;
     submit.removeAttribute('aria-busy');
     submit.textContent = 'SEND RSVP';
+    errorEl.style.display = 'block';
     if (err.name === 'AbortError') {
       errorEl.querySelector('.msg').textContent = 'That took too long. It may still have gone through, so wait a minute before trying again, or email hello@sarahandalexforever.com.';
     } else {

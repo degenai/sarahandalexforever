@@ -63,6 +63,10 @@ html, body {
   letter-spacing: 3px;
   opacity: .6;
   transition: opacity .3s, color .3s;
+  /* 24px+ tap target without moving a pixel: pad the hit box, pull the margin back */
+  display: inline-block;
+  padding: 8px 4px;
+  margin: -8px -4px;
 }
 .nav a:hover, .nav a:active, .nav a.active {
   opacity: 1;
@@ -182,7 +186,7 @@ a:focus-visible, button:focus-visible {
   text-align: center;
   padding: 60px 20px;
   font-size: 6px;
-  opacity: .3;
+  opacity: .6;
   letter-spacing: 2px;
   line-height: 2.5;
 }
@@ -208,6 +212,7 @@ a:focus-visible, button:focus-visible {
   text-align: center;
   margin-bottom: 28px;
   text-shadow: 2px 2px 0 #5a2800;
+  font-weight: normal;
 }
 
 .pixel-field { margin-bottom: 22px; }
@@ -269,7 +274,7 @@ a:focus-visible, button:focus-visible {
 .pixel-input::placeholder,
 .pixel-textarea::placeholder {
   color: var(--parchment);
-  opacity: .25;
+  opacity: .5;
 }
 
 .yn-toggle {
@@ -360,7 +365,7 @@ a:focus-visible, button:focus-visible {
 }
 .success-state .sub {
   font-size: 7px;
-  opacity: .6;
+  opacity: .8;
   letter-spacing: 1px;
   line-height: 2;
 }
@@ -381,7 +386,7 @@ a:focus-visible, button:focus-visible {
   background: rgba(220,38,38,.08);
 }
 .error-state .msg {
-  color: var(--heart);
+  color: #fecaca; /* the heart red reads 3.3:1 on wood; this is 12:1 and the border keeps the red */
   font-size: 8px;
   letter-spacing: 2px;
   line-height: 2;
