@@ -80,6 +80,16 @@ function showSuccess(attending) {
   success.focus();
 }
 
+// Back from Formspree's own captcha page with ?sent=1: record it like an in-page success
+try {
+  if (/[?&]sent=1/.test(location.search)) {
+    var pending = localStorage.getItem('rsvp-pending') || 'yes';
+    localStorage.setItem('rsvp-sent', pending + ':' + Date.now());
+    localStorage.removeItem('rsvp-pending');
+    history.replaceState(null, '', location.pathname);
+  }
+} catch (_) {}
+
 // A reload after a successful send shows the thank-you card again, not a blank form
 try {
   var sent = localStorage.getItem('rsvp-sent');
@@ -175,11 +185,21 @@ form.addEventListener('submit', function (e) {
         } else if (body && body.error) {
           detail = ' (' + body.error + ')';
         }
+        if (/reCAPTCHA|AJAX/i.test(detail)) {
+          var e2 = new Error('captcha'); e2.captcha = true; throw e2;
+        }
         var err = new Error('Submit failed'); err.detail = detail; throw err;
       });
     }
   }).catch(function (err) {
     clearTimeout(timeoutId);
+    if (err.captcha) {
+      // Formspree wants its captcha page: let the browser post the same fields the normal way.
+      try { localStorage.setItem('rsvp-pending', attending); } catch (_) {}
+      submit.textContent = 'ONE MORE STEP...';
+      form.submit();
+      return;
+    }
     submit.disabled = false;
     submit.removeAttribute('aria-busy');
     submit.textContent = 'SEND RSVP';
