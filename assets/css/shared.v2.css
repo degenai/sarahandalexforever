@@ -363,6 +363,7 @@ a:focus-visible, button:focus-visible {
   letter-spacing: 1px;
   line-height: 2;
 }
+.success-state .sub a { color: var(--gold); text-decoration: underline; }
 
 .error-state {
   text-align: center;
