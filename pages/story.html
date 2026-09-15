@@ -109,6 +109,16 @@
       object-fit: cover;
     }
     .photo-strip figure:first-child img { object-position: 50% 30%; }
+    .story-photo {
+      margin: 8px auto 36px;
+      max-width: 320px;
+      aspect-ratio: 4 / 5;
+      border: 4px solid var(--wood-border);
+      background: var(--wood-dark);
+      box-shadow: inset 4px 4px 0 var(--wood-hi), inset -4px -4px 0 #0a0500;
+      overflow: hidden;
+    }
+    .story-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .photo-caption {
       grid-column: 1 / -1;
       font-family: 'Lora', Georgia, serif;
@@ -152,6 +162,11 @@
       <p>For the second date, Alex decided to turn things up a notch. He called in a favor from a musician friend who was playing a rooftop bar and managed to wrangle himself a spot to sit in on saxophone. Was he a gigging musician? Not exactly. Was Sarah impressed? Absolutely. It was the kind of grand, slightly unhinged romantic gesture that tells you everything you need to know about a person, and Sarah liked what she saw.</p>
 
       <p>Then 2020 happened, and while the world hit pause, Sarah and Alex hit play on something real. Stuck at home like the rest of us, they did what any two people falling in love do: they farmed virtual crops, raised digital chickens, and somehow grew even closer through the magic of Stardew Valley. Nothing says "I think I love you" quite like coordinating a harvest together at 1am.</p>
+
+      <figure class="story-photo">
+        <img src="../assets/img/first-hike-2020.webp" alt="Sarah and Alex, cheek to cheek in winter coats, on a hike through bare pines" loading="lazy" width="1000" height="1250">
+      </figure>
+      <p class="photo-caption">One of the first hikes, winter 2020.</p>
 
       <p>From those early pandemic evenings, they built a life full of laughter, inside jokes, and the kind of easy, comfortable love that makes everything feel a little lighter.</p>
 
