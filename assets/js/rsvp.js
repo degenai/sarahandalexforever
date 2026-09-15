@@ -2,7 +2,7 @@ import { animate, stagger, createSpring } from 'https://cdn.jsdelivr.net/npm/ani
 
 // Respect OS reduced-motion: every tween below goes through anim(), which becomes a no-op
 var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function anim(target, opts) { if (motionOK) return anim(target, opts); }
+function anim(target, opts) { if (motionOK) return animate(target, opts); }
 
 // Entrance: stagger form fields and submit button in
 anim('#rsvp-form .pixel-field, #rsvp-form .pixel-submit', {
