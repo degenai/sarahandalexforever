@@ -3,7 +3,8 @@
   if (!sky) return;
 
   // Default count, override with data-stars on the sky div
-  var count = parseInt(sky.getAttribute('data-stars'), 10) || 150;
+  var raw = parseInt(sky.getAttribute('data-stars'), 10);
+  var count = isNaN(raw) ? 150 : Math.max(0, Math.min(raw, 400));
   var bigChance = 0.12;
 
   // ⚡ Bolt: Use a DocumentFragment to batch DOM insertions and reduce reflows
