@@ -349,7 +349,7 @@
   <a class="lantern" href="private/" aria-label="Private access" title="Private access">&#x1F3EE;</a>
   <a class="view-switch" href="mobile.html">[ mobile view ]</a>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
   <script src="assets/js/stars.js"></script>
   <script>
     // Countdown
@@ -365,19 +365,26 @@
       document.getElementById('hours').textContent = String(h).padStart(2, '0');
       document.getElementById('mins').textContent  = String(m).padStart(2, '0');
       document.getElementById('secs').textContent  = String(s).padStart(2, '0');
+      if (diff === 0) {
+        clearInterval(timer);
+        var label = document.querySelector('.cd-label');
+        if (label) label.textContent = 'we did it!';
+      }
     }
+    var timer = setInterval(tick, 1000);
     tick();
-    setInterval(tick, 1000);
 
     // Entrance animations
-    gsap.from('.sign-board', { opacity:0, y:90,  duration:1.1, ease:'back.out(1.4)', delay:.2  });
-    gsap.from('.post-legs',  { opacity:0, y:40,  duration:.8,  ease:'power2.out',    delay:.7  });
-    gsap.from('.names',      { opacity:0, y:-18, duration:.7,                        delay:1.0 });
-    gsap.from('.subtitle',   { opacity:0,         duration:.6,                        delay:1.25});
-    gsap.from('.countdown',  { opacity:0, y:14,  duration:.7,                        delay:1.45});
-    gsap.from('.date-stamp', { opacity:0,         duration:.6,                        delay:1.7 });
-    gsap.from('.hearts',     { opacity:0, scale:.4, duration:.6, ease:'back.out(2)', delay:1.9 });
-    gsap.from('.cal-row',    { opacity:0, y:10,  duration:.6,                        delay:2.1 });
+    if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.from('.sign-board', { opacity:0, y:90,  duration:1.1, ease:'back.out(1.4)', delay:.2  });
+      gsap.from('.post-legs',  { opacity:0, y:40,  duration:.8,  ease:'power2.out',    delay:.7  });
+      gsap.from('.names',      { opacity:0, y:-18, duration:.7,                        delay:1.0 });
+      gsap.from('.subtitle',   { opacity:0,         duration:.6,                        delay:1.25});
+      gsap.from('.countdown',  { opacity:0, y:14,  duration:.7,                        delay:1.45});
+      gsap.from('.date-stamp', { opacity:0,         duration:.6,                        delay:1.7 });
+      gsap.from('.hearts',     { opacity:0, scale:.4, duration:.6, ease:'back.out(2)', delay:1.9 });
+      gsap.from('.cal-row',    { opacity:0, y:10,  duration:.6,                        delay:2.1 });
+    }
   </script>
   <script>
     // Fade the grass strip out as the user scrolls past it.
