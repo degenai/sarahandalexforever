@@ -1,17 +1,51 @@
-import { animate, stagger, createSpring } from 'https://cdn.jsdelivr.net/npm/animejs@4.5.0/+esm';
-
-// Respect OS reduced-motion: every tween below goes through anim(), which becomes a no-op
+// Animation is optional. The import is dynamic so a blocked or slow CDN never
+// takes the form logic down with it: anim() is a no-op until anime.js lands.
 var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function anim(target, opts) { if (motionOK) return animate(target, opts); }
+var animate = null, stagger = null, createSpring = null;
+function anim(target, opts) { if (motionOK && animate) return animate(target, opts); }
 
-// Entrance: stagger form fields and submit button in
-anim('#rsvp-form .pixel-field, #rsvp-form .pixel-submit', {
-  opacity: [0, 1],
-  y: [-10, 0],
-  delay: stagger(45, { start: 120 }),
-  duration: 500,
-  ease: 'outQuad'
-});
+var loadStart = Date.now();
+import('https://cdn.jsdelivr.net/npm/animejs@4.5.0/+esm').then(function (m) {
+  animate = m.animate; stagger = m.stagger; createSpring = m.createSpring;
+  // Entrance stagger only if the library arrived fast enough to not blink already-visible fields
+  if (Date.now() - loadStart < 400) {
+    anim('#rsvp-form .pixel-field, #rsvp-form .pixel-submit', {
+      opacity: [0, 1],
+      y: [-10, 0],
+      delay: stagger(45, { start: 120 }),
+      duration: 500,
+      ease: 'outQuad'
+    });
+  }
+}).catch(function () { /* form works without it */ });
+
+var form     = document.getElementById('rsvp-form');
+var submit   = document.getElementById('rsvp-submit');
+var errorEl  = document.getElementById('rsvp-error');
+var success  = document.getElementById('rsvp-success');
+var attendEl = document.getElementById('rsvp-attending');
+var sidEl    = document.getElementById('rsvp-sid');
+var subjEl   = document.getElementById('rsvp-subject');
+var partyEl  = document.getElementById('rsvp-party');
+var guestsEl = document.getElementById('rsvp-guests');
+var successMsg = document.getElementById('rsvp-success-msg');
+var successSub = document.getElementById('rsvp-success-sub');
+
+// One id per submission attempt so a retried send is recognizable as a duplicate in the sheet
+function newSubmissionId() {
+  if (sidEl) sidEl.value = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+}
+newSubmissionId();
+
+// Declining hides the attending-only fields outright. They stay enabled so every
+// submission carries the same set of keys (a sheet pipe wants stable columns);
+// `required` moves with the choice so a hidden field can never block a send.
+function setAttending(val) {
+  var yes = val === 'yes';
+  document.querySelectorAll('.attending-only').forEach(function (field) { field.hidden = !yes; });
+  if (partyEl)  partyEl.required  = yes;
+  if (guestsEl) guestsEl.required = yes;
+}
 
 // Yes/No toggle with bounce on click
 document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
@@ -26,68 +60,62 @@ document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
       btn.setAttribute('aria-pressed', 'true');
       var val = btn.getAttribute('data-val');
       if (hidden) hidden.value = val;
-
-      var attendingFields = document.querySelectorAll('.attending-only');
-      if (val === 'no') {
-        attendingFields.forEach(function(field) {
-          field.style.opacity = '0.4';
-          field.style.transition = 'opacity 0.3s';
-          field.style.pointerEvents = 'none';
-          field.querySelectorAll('input, select, textarea').forEach(function(input) {
-            input.disabled = true;
-          });
-        });
-      } else {
-        attendingFields.forEach(function(field) {
-          field.style.opacity = '1';
-          field.style.pointerEvents = 'auto';
-          field.querySelectorAll('input, select, textarea').forEach(function(input) {
-            input.disabled = false;
-          });
-        });
-      }
-
-      anim(btn, {
-        scale: [1, 1.12, 1],
-        duration: 340,
-        ease: 'outQuad'
-      });
+      setAttending(val);
+      anim(btn, { scale: [1, 1.12, 1], duration: 340, ease: 'outQuad' });
     });
   });
 });
 
-// AJAX submit, keeps guests on the page, shows pixel-art success state
-var form    = document.getElementById('rsvp-form');
-var submit  = document.getElementById('rsvp-submit');
-var errorEl = document.getElementById('rsvp-error');
-var success = document.getElementById('rsvp-success');
-
-// One id per page load so a retried send can be recognized as a duplicate in the sheet
-var sidEl = document.getElementById('rsvp-sid');
-if (sidEl) sidEl.value = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+function showSuccess(attending) {
+  form.style.display = 'none';
+  success.style.display = 'block';
+  if (attending === 'no') {
+    if (successMsg) successMsg.textContent = 'THANK YOU';
+    if (successSub) successSub.innerHTML = "We'll miss you. Thank you for letting us know.<br>We'll send you the video.";
+  } else {
+    if (successMsg) successMsg.textContent = 'RSVP SENT';
+    if (successSub) successSub.innerHTML = "Thank you. We can't wait to see you.<br>See you March 6, 2027.";
+  }
+  success.focus();
+}
 
 // A reload after a successful send shows the thank-you card again, not a blank form
 try {
-  if (localStorage.getItem('rsvp-sent')) {
-    form.style.display = 'none';
-    success.style.display = 'block';
-  }
+  var sent = localStorage.getItem('rsvp-sent');
+  if (sent) showSuccess(sent.indexOf('no') === 0 ? 'no' : 'yes');
 } catch (_) {}
+
+// "Send another" starts clean: new id, empty fields, no lingering yes/no
 var again = document.getElementById('rsvp-again');
 if (again) again.addEventListener('click', function (e) {
   e.preventDefault();
   try { localStorage.removeItem('rsvp-sent'); } catch (_) {}
+  form.reset();
+  document.querySelectorAll('.yn-btn').forEach(function (b) {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
+  if (attendEl) attendEl.value = '';
+  document.querySelectorAll('.attending-only').forEach(function (field) { field.hidden = false; });
+  if (partyEl)  partyEl.required  = false;
+  if (guestsEl) guestsEl.required = false;
+  newSubmissionId();
+  errorEl.style.display = 'none';
   success.style.display = 'none';
   form.style.display = '';
   submit.disabled = false;
+  submit.removeAttribute('aria-busy');
   submit.textContent = 'SEND RSVP';
+  var first = document.getElementById('rsvp-name');
+  if (first) first.focus();
 });
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
   errorEl.style.display = 'none';
 
-  if (!document.getElementById('rsvp-attending').value) {
+  var attending = attendEl ? attendEl.value : '';
+  if (!attending) {
     errorEl.querySelector('.msg').textContent = 'Please choose Attending or Declining.';
     errorEl.style.display = 'block';
 
@@ -97,7 +125,7 @@ form.addEventListener('submit', function (e) {
       anim(toggleContainer, {
         translateX: [-5, 5, -5, 5, 0],
         duration: 400,
-        easing: 'easeInOutQuad'
+        ease: 'inOutQuad'
       });
       var firstBtn = toggleContainer.querySelector('.yn-btn');
       if (firstBtn) firstBtn.focus();
@@ -105,11 +133,17 @@ form.addEventListener('submit', function (e) {
     return;
   }
 
+  // One email per guest, not one hundred replies in a single Gmail thread
+  if (subjEl) {
+    var who = (document.getElementById('rsvp-name') || {}).value || 'a guest';
+    subjEl.value = 'RSVP: ' + who.trim() + (attending === 'yes' ? ' (attending)' : ' (declining)');
+  }
+
   submit.disabled = true;
   submit.setAttribute('aria-busy', 'true');
   submit.textContent = 'SENDING...';
 
-  // Security enhancement: Add timeout to prevent hanging connections
+  // Timeout so a hung connection never leaves the button dead
   var controller = new AbortController();
   var timeoutId = setTimeout(function () { controller.abort(); }, 30000);
 
@@ -122,16 +156,15 @@ form.addEventListener('submit', function (e) {
     clearTimeout(timeoutId);
     if (res.ok) {
       submit.removeAttribute('aria-busy');
-      form.style.display = 'none';
-      success.style.display = 'block';
+      showSuccess(attending);
       anim('#rsvp-success', {
         scale: [0.85, 1],
         opacity: [0, 1],
-        ease: createSpring({ mass: 1, stiffness: 110, damping: 13 }),
+        ease: createSpring ? createSpring({ mass: 1, stiffness: 110, damping: 13 }) : 'outQuad',
         duration: 700
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      try { localStorage.setItem('rsvp-sent', String(Date.now())); } catch (_) {}
+      try { localStorage.setItem('rsvp-sent', attending + ':' + Date.now()); } catch (_) {}
     } else {
       // Surface Formspree's own reason (422 validation, plan limits) instead of a generic line
       return res.json().catch(function () { return {}; }).then(function (body) {
@@ -141,7 +174,7 @@ form.addEventListener('submit', function (e) {
         } else if (body && body.error) {
           detail = ' (' + body.error + ')';
         }
-        var e = new Error('Submit failed'); e.detail = detail; throw e;
+        var err = new Error('Submit failed'); err.detail = detail; throw err;
       });
     }
   }).catch(function (err) {

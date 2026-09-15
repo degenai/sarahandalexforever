@@ -61,7 +61,9 @@
 
     <div class="rsvp-intro">
       We can't wait to celebrate with you.<br>
-      Please reply by February 6, 2027.
+      Please reply by February 6, 2027.<br>
+      Plans change? Send a new reply with the same name and email and we'll use the latest one.<br>
+      Questions: <a href="mailto:hello@sarahandalexforever.com">hello@sarahandalexforever.com</a>
     </div>
 
     <form id="rsvp-form" class="form-card"
@@ -95,8 +97,9 @@
       <div class="pixel-field attending-only">
         <label class="pixel-label" for="rsvp-party">PARTY SIZE (INCLUDING YOU)</label>
         <select class="pixel-select" id="rsvp-party" name="party_size">
-          <option>1</option><option>2</option><option>3</option>
-          <option>4</option><option>5</option><option>6+</option>
+          <option value="" selected>CHOOSE</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option>
         </select>
       </div>
 
@@ -122,11 +125,11 @@
 
       <div class="pixel-field">
         <label class="pixel-label" for="rsvp-addr">MAILING ADDRESS</label>
-        <textarea class="pixel-textarea" id="rsvp-addr" name="address" placeholder="FOR THANK-YOU CARDS" maxlength="300"></textarea>
+        <textarea class="pixel-textarea" id="rsvp-addr" name="address" placeholder="FOR THANK-YOU CARDS" maxlength="300" autocomplete="street-address"></textarea>
       </div>
 
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
-      <input type="hidden" name="_subject" value="New RSVP from sarahandalexforever">
+      <input type="hidden" name="_subject" id="rsvp-subject" value="New RSVP from sarahandalexforever">
       <input type="hidden" name="submission_id" id="rsvp-sid" value="">
 
       <button class="pixel-submit" type="submit" id="rsvp-submit">SEND RSVP</button>
@@ -136,13 +139,13 @@
       </div>
     </form>
 
-    <div id="rsvp-success" class="form-card success-state" style="display:none" role="status" aria-live="polite">
+    <div id="rsvp-success" class="form-card success-state" style="display:none" role="status" aria-live="polite" tabindex="-1">
       <div class="nail tl"></div><div class="nail tr"></div>
       <div class="nail bl"></div><div class="nail br"></div>
       <div class="check" aria-hidden="true">♥</div>
-      <div class="msg">RSVP SENT</div>
-      <div class="sub">Thank you. We can't wait to see you.<br>See you March 6, 2027.</div>
-      <div class="sub"><a href="#" id="rsvp-again">Replying for someone else? Send another.</a></div>
+      <div class="msg" id="rsvp-success-msg">RSVP SENT</div>
+      <div class="sub" id="rsvp-success-sub">Thank you. We can't wait to see you.<br>See you March 6, 2027.</div>
+      <div class="sub"><a href="#" id="rsvp-again">Plans changed, or replying for someone else? Send another.</a></div>
     </div>
   </div>
 

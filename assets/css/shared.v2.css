@@ -366,6 +366,13 @@ a:focus-visible, button:focus-visible {
 }
 .success-state .sub a { color: var(--gold); text-decoration: underline; }
 
+/* iOS Safari zooms the page into any focused field under 16px. Only touch devices pay for it. */
+@media (hover: none) and (pointer: coarse) {
+  .pixel-input, .pixel-textarea, .pixel-select { font-size: 16px; }
+}
+.rsvp-intro a { color: var(--gold); }
+.success-state:focus { outline: none; }
+
 .error-state {
   text-align: center;
   padding: 24px 20px;
