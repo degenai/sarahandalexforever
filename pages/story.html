@@ -121,6 +121,8 @@
     }
     .story-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .story-photo.strip { aspect-ratio: auto; max-width: 220px; }
+    /* .story-text already fades to .92; keep captions inside it at the same .75 as the proposal strip */
+    .story-text .photo-caption { opacity: .82; }
     .photo-caption {
       grid-column: 1 / -1;
       font-family: 'Lora', Georgia, serif;

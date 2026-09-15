@@ -1,7 +1,11 @@
 import { animate, stagger, createSpring } from 'https://cdn.jsdelivr.net/npm/animejs@4/+esm';
 
+// Respect OS reduced-motion: every tween below goes through anim(), which becomes a no-op
+var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function anim(target, opts) { if (motionOK) return anim(target, opts); }
+
 // Entrance: stagger form fields and submit button in
-animate('#rsvp-form .pixel-field, #rsvp-form .pixel-submit', {
+anim('#rsvp-form .pixel-field, #rsvp-form .pixel-submit', {
   opacity: [0, 1],
   y: [-10, 0],
   delay: stagger(45, { start: 120 }),
@@ -43,7 +47,7 @@ document.querySelectorAll('.yn-toggle').forEach(function (toggle) {
         });
       }
 
-      animate(btn, {
+      anim(btn, {
         scale: [1, 1.12, 1],
         duration: 340,
         ease: 'outQuad'
@@ -90,7 +94,7 @@ form.addEventListener('submit', function (e) {
     // UX/a11y: shake the toggle container and return focus to the first button
     var toggleContainer = document.querySelector('.yn-toggle');
     if (toggleContainer) {
-      animate(toggleContainer, {
+      anim(toggleContainer, {
         translateX: [-5, 5, -5, 5, 0],
         duration: 400,
         easing: 'easeInOutQuad'
@@ -120,7 +124,7 @@ form.addEventListener('submit', function (e) {
       submit.removeAttribute('aria-busy');
       form.style.display = 'none';
       success.style.display = 'block';
-      animate('#rsvp-success', {
+      anim('#rsvp-success', {
         scale: [0.85, 1],
         opacity: [0, 1],
         ease: createSpring({ mass: 1, stiffness: 110, damping: 13 }),
